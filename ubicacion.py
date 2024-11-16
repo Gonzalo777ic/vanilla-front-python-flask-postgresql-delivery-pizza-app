@@ -7,9 +7,14 @@ ubicacion_repartidor = {"lat": None, "lon": None}
 
 
 @app.route('/')
+def layout():
+    """Página principal para visualizar promociones y la ubicación del repartidor"""
+    return render_template('layout.html')
+
+@app.route('/index')
 def index():
     """Página principal para visualizar promociones y la ubicación del repartidor"""
-    return render_template('promotions.html')
+    return render_template('index.html')
 
 @app.route('/rastreo')
 def rastreo():

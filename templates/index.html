@@ -1,38 +1,16 @@
 {% extends "layout.html" %}
 
-{% block title %}MENÚ{% endblock %}
-
 {% block content %}
-<section class="row align-items-center">
-    <div class="col-md-6">
-        <h1 class="display-5 fw-bold text-primary">Sistema de gestión de PEDIDOS</h1>
-        <p class="lead text-secondary">Reduce entre 10 y 20% tus costos hospitalarios utilizando las mejores prácticas de Health Management con nuestra solución.</p>
-        <div class="d-flex gap-2 mt-4">
-            <a href="{{ url_for('register') }}" class="btn btn-success btn-lg">Por qué elegir nuestro sistema</a>
-            <a href="{{ url_for('view_all') }}" class="btn btn-primary btn-lg">Agenda una demo sin costo</a>
-        </div>
+<section class="promotions">
+    <div class="promotion">
+        <img src="{{ url_for('static', filename='images/pizza1.jpg') }}" alt="Pizza 1">
+        <h2>Promoción 1</h2>
+        <p>¡Compra una, lleva dos!</p>
     </div>
-    <div class="col-md-6">
-        <img src="https://media.istockphoto.com/id/1166199044/es/foto/feliz-chica-asi%C3%A1tica-en-la-cama-pacientes-del-hospital-sonriendo-y-mostrar-una-tarjeta-de.jpg?s=170667a&w=0&k=20&c=VK9ZqEyLJa8UNDNlrdBWV3G_KZy9ylNhHM6pby2hh58=" alt="Vista del sistema" class="img-fluid rounded shadow">
-    </div>
-</section>
-
-<section class="my-5 text-center">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card shadow-sm p-4">
-                <h3 class="text-success">Beneficios</h3>
-                <p>Descubre cómo nuestro sistema puede optimizar la gestión y reducir costos en el área de salud.</p>
-                <a href="{{ url_for('beneficios') }}" class="btn btn-outline-success">Ver más</a>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm p-4">
-                <h3 class="text-success">Soporte</h3>
-                <p>Equipo de soporte dedicado para ayudarte en cada paso del proceso de implementación.</p>
-                <a href="{{ url_for('contactanos') }}" class="btn btn-outline-primary">Contáctanos</a>
-            </div>
-        </div>
+    <div class="promotion">
+        <img src="{{ url_for('static', filename='images/pizza2.jpg') }}" alt="Pizza 2">
+        <h2>Promoción 2</h2>
+        <p>Pizza grande a mitad de precio.</p>
     </div>
 </section>
 {% endblock %}
