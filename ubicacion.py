@@ -11,6 +11,11 @@ def layout():
     """Página principal para visualizar promociones y la ubicación del repartidor"""
     return render_template('layout.html')
 
+@app.route('/contactanos')
+def contactanos():
+    """Página principal para visualizar promociones y la ubicación del repartidor"""
+    return render_template('contactanos.html')
+
 @app.route('/index')
 def index():
     """Página principal para visualizar promociones y la ubicación del repartidor"""
@@ -20,6 +25,13 @@ def index():
 def rastreo():
     """Página para el repartidor que envía la ubicación en tiempo real"""
     return render_template('rastreo.html')
+
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query', '')
+    # Lógica para manejar la búsqueda
+    return f"Resultados de búsqueda para: {query}"
+
 
 @app.route('/actualizar_ubicacion', methods=['POST'])
 def actualizar_ubicacion():

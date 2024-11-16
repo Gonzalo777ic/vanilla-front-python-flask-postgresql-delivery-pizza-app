@@ -8,18 +8,34 @@
 </head>
 <body>
     <header>
-        <h1>Promociones Papa Flask</h1>
-        <nav>
-            <a class="nav-link" href="{{ url_for('index') }}">MENÚ</a>
-            <a class="nav-link" href="{{ url_for('rastreo') }}">Inicio</a>
-            <a class="nav-link" href="{{ url_for('ver_ubicacion') }}">Inicio</a>
-        </nav>
+        <div class="header-container">
+            <h1>Promociones Papa Flask</h1>
+            <nav>
+                <a href="{{ url_for('index') }}">MENÚ</a>
+                <a href="{{ url_for('rastreo') }}">PEDIDO</a>
+                <a href="">UBICACIÓN</a>
+            </nav>
+            <!-- Barra de búsqueda -->
+            <form action="{{ url_for('search') }}" method="GET" class="search-form">
+                <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
+                <button type="submit" class="search-button">Buscar</button>
+            </form>
+        </div>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <p>&copy; 2024 Papa Flask. Todos los derechos reservados.</p>
+    <footer class="bg-dark text-light py-4"> 
+        <div class="container text-center">
+            <p>
+                Contacto: 
+                <a href="mailto:info@tusistema.com" class="text-white text-decoration-none">
+                    info@tusistema.com
+                </a> 
+                | Teléfono: +51 123 456 789
+            </p>
+            <p class="mb-0">&copy; 2024 PIZZA. Todos los derechos reservados.</p>
+        </div>
     </footer>
 </body>
 </html>
