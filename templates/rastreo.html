@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreo de Ubicación del Repartidor</title>
+</head>
+<body>
+    <h1>Rastreo de Ubicación</h1>
+    <p id="status">Estado: No rastreando</p>
+    <button onclick="iniciarRastreo()">Iniciar Rastreo</button>
+    <button onclick="detenerRastreo()">Detener Rastreo</button>
+
+    <script>
+        let watchId;
+
+        // Función para iniciar el rastreo de ubicación
+        function iniciarRastreo() {
+            if (navigator.geolocation) {
+                document.getElementById("status").innerText = "Estado: Rastreo iniciado...";
+                watchId = navigator.geolocation.watchPosition(enviarUbicacion, mostrarError, {
+                    enableHighAccuracy: true,
+                    maximumAge: 0
+                });
+            } else {
+                alert("Geolocalización no soportada en este navegador.");
+            }
+        }
+
+        // Función para detener el rastreo de ubicación
+        function detenerRastreo() {
+            if (watchId) {
+                navigator.geolocation.clearWatch(watchId);
+                document.getElementById("status").innerText = "Estado: Rastreo detenido.";
+            }
+        }
+
+        // Enviar la ubicación al servidor Flask
+        function enviarUbicacion(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            fetch('/actualizar_ubicacion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    lat: lat,
+                    lon: lon
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Ubicación enviada:", data);
+            })
+            .catch(error => {
+                console.error("Error al enviar la ubicación:", error);
+            });
+        }
+
+        // Mostrar errores si la geolocalización falla
+        function mostrarError(error) {
+            console.warn(`ERROR(${error.code}): ${error.message}`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <title>Ver Ubicación del Repartidor</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ubicación del Repartidor</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([-12.0464, -77.0428], 12); // Centrado inicial en Lima
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        let repartidorMarker;
+
+        // Función para obtener la ubicación del repartidor y actualizar el mapa
+        function obtenerUbicacionRepartidor() {
+            fetch('/obtener_ubicacion')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ubicacion) {
+                        const { lat, lon } = data.ubicacion;
+                        if (!repartidorMarker) {
+                            repartidorMarker = L.marker([lat, lon]).addTo(map)
+                                .bindPopup("Ubicación del Repartidor");
+                        } else {
+                            repartidorMarker.setLatLng([lat, lon]);
+                        }
+                        map.setView([lat, lon], 15); // Centra el mapa en la nueva ubicación
+                    }
+                })
+                .catch(error => console.error("Error al obtener la ubicación del repartidor:", error));
+        }
+
+        // Llama a la función cada 10 segundos para actualizar la ubicación en tiempo real
+        setInterval(obtenerUbicacionRepartidor, 10000);
+    </script>
+</body>
+</html>
