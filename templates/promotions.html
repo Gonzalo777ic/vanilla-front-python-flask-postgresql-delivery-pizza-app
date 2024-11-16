@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promociones y Rastreo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>PIZZA CALIENTE</h1>
+        <nav>
+            <a href="/">MENÚ</a>
+            <a href="/">PEDIDOS</a>
+            <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Buscar...">
+                <button type="submit">Buscar</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <section class="promotions">
+            <h2>Nuestras Promociones</h2>
+            <div class="promotion">
+                <img src="images/pizza1.jpg" alt="Pizza 1">
+                <h3>Promoción 1</h3>
+                <p>¡Compra una, lleva dos!</p>
+            </div>
+            <div class="promotion">
+                <img src="{{ url_for('static', filename='images/pizza2.jpg') }}" alt="Pizza 2">
+                <h3>Promoción 2</h3>
+                <p>Pizza grande a mitad de precio.</p>
+            </div>
+            <div class="promotion">
+                <img src="{{ url_for('static', filename='images/pizza2.jpg') }}" alt="Pizza 2">
+                <h3>Promoción 3</h3>
+                <p>Pizza Familiar a mitad de precio.</p>
+            </div>
+        </section>
+
+        <hr>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Promociones y Rastreo. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

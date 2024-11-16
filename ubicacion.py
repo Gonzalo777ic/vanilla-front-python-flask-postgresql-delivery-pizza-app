@@ -5,10 +5,11 @@ app = Flask(__name__)
 # Base de datos simulada para almacenar la ubicación del repartidor
 ubicacion_repartidor = {"lat": None, "lon": None}
 
+
 @app.route('/')
 def index():
-    """Página principal para visualizar la ubicación del repartidor en tiempo real"""
-    return render_template('ver_ubicacion.html')
+    """Página principal para visualizar promociones y la ubicación del repartidor"""
+    return render_template('promotions.html')
 
 @app.route('/rastreo')
 def rastreo():
