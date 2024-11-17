@@ -2,18 +2,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
 }
 
 header {
-    background-color: #d32f2f;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(255, 255, 255);
     padding: 1rem;
     text-align: center;
 }
 
 nav a {
-    color: white;
+    color: rgb(19, 18, 18);
     text-decoration: none;
     margin: 0 1rem;
 }
@@ -26,8 +26,8 @@ nav a {
 }
 
 .promotion {
-    background: white;
-    border: 1px solid #ccc;
+    background: rgb(255, 255, 255);
+    border: 1px solid #ffffff;
     border-radius: 5px;
     margin: 1rem;
     padding: 1rem;
@@ -41,8 +41,8 @@ nav a {
 }
 
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #1c1b1b;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 1rem 0;
 }
@@ -52,19 +52,19 @@ a.text-white {
 }
 
 a.text-white:hover {
-    color: #cccccc; /* Un tono más claro al pasar el mouse */
+    color: #ffffff; /* Un tono más claro al pasar el mouse */
 }
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
+    background-color: #faf7f7;
+    color: #0c0c0c;
 }
 
 nav a {
-    color: #fff;
+    color: #0e0e0e;
     text-decoration: none;
     margin: 0 10px;
 }
@@ -76,22 +76,18 @@ nav a {
 
 .search-input {
     padding: 5px 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 4px;
     font-size: 14px;
 }
+.search-input {
+    margin-right: 10px;
+}
+
 
 .search-button {
-    padding: 5px 10px;
-    margin-left: 5px;
-    background-color: #ff4500;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
+    width: 20px; /* Ancho del botón */
+    height: 20px; /* Alto del botón */
 }
 
-.search-button:hover {
-    background-color: #e03d00;
-}
 
