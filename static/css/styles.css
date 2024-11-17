@@ -17,28 +17,82 @@ nav a {
     text-decoration: none;
     margin: 0 1rem;
 }
-
-.promotions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 2rem;
+/* Estilo para los enlaces de navegación */
+nav a {
+    font-family: Arial, sans-serif; /* Ajusta según la fuente más similar */
+    font-weight: bold; /* Hace que el texto sea negrita */
+    font-size: 18px; /* Ajusta el tamaño de la fuente */
+    color: black; /* Color negro */
+    text-decoration: none; /* Elimina el subrayado */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    margin-right: 15px; /* Espacio entre los enlaces */
 }
+
+nav a:hover {
+    color: red; /* Cambia el color al pasar el mouse */
+    text-shadow: 1px 1px 2px #000; /* Añade un pequeño efecto de sombra */
+}
+
 
 .promotion {
     background: rgb(255, 255, 255);
-    border: 1px solid #ffffff;
+    border: 1px solid #1f1f1f;
     border-radius: 5px;
     margin: 1rem;
     padding: 1rem;
     text-align: center;
     width: 300px;
 }
-
-.promotion img {
-    max-width: 100%;
-    border-radius: 5px;
+/* Contenedor principal de las promociones */
+/* Contenedor principal de las promociones */
+/* Contenedor principal de las promociones */
+.promotions {
+    display: flex; /* Activa flexbox */
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+    justify-content: space-between; /* Espacio uniforme entre los elementos */
+    align-items: flex-start; /* Alinea los elementos al inicio verticalmente */
+    gap: 20px; /* Espaciado entre las promociones */
+    padding: 20px; /* Espaciado interno del contenedor */
+    overflow-x: auto; /* Permite desplazamiento horizontal si es necesario */
 }
+
+/* Estilo para cada promoción */
+.promotion {
+    flex: 1 1 23%; /* Ocupa el 23% del contenedor, ajustado para 4 elementos */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    text-align: center; /* Centra el texto e imagen */
+    background: #f9f9f9; /* Fondo claro */
+    padding: 0px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde ligero */
+    border-radius: 8px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para contener la imagen */
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+}
+
+/* Ajustes para imágenes */
+.promotion img {
+    object-fit: cover; /* Ajusta la imagen sin distorsionarla, cubriendo el área */
+    width: 100%; /* Imagen adaptada al ancho del contenedor */
+    height: 100%; /* Imagen ocupa toda la altura del contenedor */
+    border-radius: 8px; /* Bordes redondeados en la imagen */
+    display: block; /* Elimina el espacio debajo de la imagen */
+}
+
+/* Estilo para el título */
+.promotion h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Estilo para la descripción */
+.promotion p {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.4;
+}
+
+
 
 footer {
     background-color: #1c1b1b;
