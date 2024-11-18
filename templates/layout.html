@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>Promociones de Pizza</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -24,7 +24,38 @@
         </div>
     </header>
     <main>
-        {% block content %}{% endblock %}
+        <!-- Contenido principal del index -->
+        <section class="promotions">
+            <div class="promotion">
+                <img src="{{ url_for('static', filename='images/superfamiliar.webp') }}" alt="Pizza 1">
+                <h2>Super Familiar</h2>
+                <p>1 Pizza superfamiliar hawaiana o pepperoni con 3 rolls de pepperoni</p>
+                <p class="price">S/ 59.90</p> <!-- Precio añadido -->
+                <button>COMPRAR</button>
+            </div>
+            <div class="promotion">
+                <img src="{{ url_for('static', filename='images/duo.webp') }}" alt="Pizza 2">
+                <h2>Dúo</h2>
+                <p>1 pizza grande clásica o especialidad con 3 rolls de pepperoni</p>
+                <p class="price">S/ 39.90</p> <!-- Precio añadido -->
+                <button>COMPRAR</button>
+            </div>
+            <div class="promotion">
+                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 3">
+                <h2>Personal</h2>
+                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
+                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
+                <button>COMPRAR</button>
+            </div>
+            <div class="promotion">
+                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 4">
+                <h2>Personal</h2>
+                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
+                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
+                <button>COMPRAR</button>
+            </div>
+        </section>
+        
     </main>
     <footer class="bg-dark text-light py-4"> 
         <div class="container text-center">
@@ -40,4 +71,3 @@
     </footer>
 </body>
 </html>
-

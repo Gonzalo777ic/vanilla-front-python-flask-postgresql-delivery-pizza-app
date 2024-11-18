@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promociones de Pizza</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
+            </div>
+            <form action="{{ url_for('search') }}" method="GET" class="search-form">
+                <input type="text" name="query" value="{{ query }}" placeholder="Buscar promociones..." class="search-input">
+                <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
+            </form>
+            <nav>
+                <a href="{{ url_for('index') }}">MENÚ</a>
+                <a href="{{ url_for('rastreo') }}">PEDIDO</a>
+                <a href="#">UBICACIÓN</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="noresultado">
+            {% if resultados %}
+                <!-- Muestra los resultados de búsqueda aquí -->
+                {% for item in resultados %}
+                <div class="promotion">
+                    <img src="{{ url_for('static', filename='images/promotion-placeholder.png') }}" alt="{{ item.nombre }}" class="promotion-image">
+                    <h2>{{ item.nombre }}</h2>
+                    <p>{{ item.descripcion }}</p>
+                    <p class="price">{{ item.precio }}</p>
+                    <button>COMPRAR</button>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Alerta de productos no encontrados -->
+                <div class="alert alert-info">
+                    <i class="icon">ℹ️</i> No podemos encontrar productos que coincidan con la selección.
+                </div>
+
+                <!-- Detalles adicionales de resultados no encontrados -->
+                <div class="no-results">
+                    <img src="{{ url_for('static', filename='images/search-empty.png') }}" alt="Sin resultados" class="no-results-image">
+                    <h2>NO SE HAN ENCONTRADO RESULTADOS</h2>
+                    <p class="suggestions-title">Sugerencia de búsqueda</p>
+                    <ul class="suggestions-list">
+                        <li>Comprueba que hayas escrito todo correctamente, o bien, intenta cambiar la ortografía de alguna de las palabras.</li>
+                        <li>Limita tu búsqueda a 1 o 2 términos.</li>
+                        <li>No seas tan específico. Usa más términos generales de búsqueda para poder encontrar productos similares.</li>
+                    </ul>
+                    <a href="{{ url_for('index') }}" class="home-button">IR AL MENÚ</a>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+    <footer class="bg-dark text-light py-4"> 
+        <div class="container text-center">
+            <p>
+                Contacto: 
+                <a href="mailto:info@tusistema.com" class="text-white text-decoration-none">
+                    info@tusistema.com
+                </a> 
+                | Teléfono: +51 123 456 789
+            </p>
+            <p class="mb-0">&copy; 2024 PIZZA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

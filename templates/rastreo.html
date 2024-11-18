@@ -1,15 +1,37 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rastreo de Ubicación del Repartidor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Rastreo de Ubicación</h1>
-    <p id="status">Estado: No rastreando</p>
-    <button onclick="iniciarRastreo()">Iniciar Rastreo</button>
-    <button onclick="detenerRastreo()">Detener Rastreo</button>
+    <!-- Encabezado con el logo y el menú -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
+            </div>
+            <form action="{{ url_for('search') }}" method="GET" class="search-form">
+                <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
+                <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
+            </form>
+            <nav>
+                <a href="{{ url_for('index') }}">MENÚ</a>
+                <a href="{{ url_for('rastreo') }}">PEDIDO</a>
+                <a href="">UBICACIÓN</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido de la página de Rastreo -->
+    <main>
+        <h1>Rastreo de Ubicación</h1>
+        <p id="status">Estado: No rastreando</p>
+        <button onclick="iniciarRastreo()">Iniciar Rastreo</button>
+        <button onclick="detenerRastreo()">Detener Rastreo</button>
+    </main>
 
     <script>
         let watchId;

@@ -26,11 +26,13 @@ def rastreo():
     """Página para el repartidor que envía la ubicación en tiempo real"""
     return render_template('rastreo.html')
 
-@app.route('/search', methods=['GET'])
+@app.route('/search')
 def search():
     query = request.args.get('query', '')
-    # Lógica para manejar la búsqueda
-    return f"Resultados de búsqueda para: {query}"
+    # Simulación de resultados vacíos para este ejemplo
+    resultados = []  # Cambia esta línea con tu lógica de búsqueda.
+    
+    return render_template('search.html', query=query, resultados=resultados)
 
 
 @app.route('/actualizar_ubicacion', methods=['POST'])
