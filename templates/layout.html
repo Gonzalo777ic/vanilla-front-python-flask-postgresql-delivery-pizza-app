@@ -25,6 +25,17 @@
     </header>
     <main>
         <!-- Contenido principal del index -->
+        <section class="promotions-header">
+            <h1>PROMOCIONES</h1>
+            <div class="promotions-filters">
+                <button class="filter active">VER TODO</button>
+                <button class="filter">1 PERSONA</button>
+                <button class="filter">2 PERSONAS</button>
+                <button class="filter">3-4 PERSONAS</button>
+                <button class="filter">5 A MÁS</button>
+            </div>
+        </section>
+        
         <section class="promotions">
             <div class="promotion">
                 <img src="{{ url_for('static', filename='images/superfamiliar.webp') }}" alt="Pizza 1">
@@ -57,17 +68,38 @@
         </section>
         
     </main>
-    <footer class="bg-dark text-light py-4"> 
-        <div class="container text-center">
-            <p>
-                Contacto: 
-                <a href="mailto:info@tusistema.com" class="text-white text-decoration-none">
-                    info@tusistema.com
-                </a> 
-                | Teléfono: +51 123 456 789
-            </p>
-            <p class="mb-0">&copy; 2024 PIZZA. Todos los derechos reservados.</p>
+    <footer class="footer bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Conócenos</h5>
+                    <ul class="list-unstyled">
+                        <a href="#" class="text-white">Acerca de Pizza Feliz</a></li>
+                        <a href="#" class="text-white">Nuestra Misión</a>
+                        <a href="#" class="text-white">Nuestra Visión</a>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5>Nuestros Productos</h5>
+                    <ul class="list-unstyled">
+                        <a href="#" class="text-white">Promociones</a>
+                        <a href="#" class="text-white">Pizzas</a>
+                        <a href="#" class="text-white">Combos</a>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5>Ayuda</h5>
+                    <ul class="list-unstyled">
+                        <a href="#" class="text-white">Políticas de Datos Personales</a>
+                        <a href="#" class="text-white">Términos y Condiciones de Promociones</a>
+                        <a href="#" class="text-white">Contáctanos</a>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p class="mb-0">&copy; 2024 PIZZA FELIZ. Todos los derechos reservados.</p>
+            </div>
         </div>
-    </footer>
+    </footer>    
 </body>
 </html>

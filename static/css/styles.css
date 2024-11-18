@@ -29,7 +29,7 @@ nav a {
 }
 
 nav a:hover {
-    color: red; /* Cambia el color al pasar el mouse */
+    color: rgb(232, 93, 29); /* Cambia el color al pasar el mouse */
     text-shadow: 1px 1px 2px #000; /* Añade un pequeño efecto de sombra */
 }
 
@@ -164,8 +164,122 @@ nav a:hover {
     }
 }
 
+.promotions-header { 
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 40px; /* Mueve el contenido a la derecha */
+}
 
+.promotions-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    display: inline-block;
+    margin-right: 10px;
+}
 
+.promotions-header a {
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.promotions-filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap; /* Ajusta para pantallas pequeñas */
+    margin-left: 0px; /* Mueve los filtros a la derecha */
+}
+
+.promotions-filters .filter {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Animación suave para los cambios */
+}
+
+/* Cambia de color a verde y el texto a blanco cuando pasa el cursor */
+.promotions-filters .filter:hover {
+    background-color: green; /* Fondo verde */
+    color: white; /* Letra blanca */
+}
+
+.promotions-filters .filter.active {
+    background-color: #2e6e31;
+    color: white;
+    border: none;
+}
+
+.footer .col-md-6 {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 200px; /* Mueve el contenido a la derecha */
+}
+/* Estilo general del footer */
+.footer {
+    background-color: #333; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    padding: 20px 0;
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+}
+
+/* Estilo de los títulos del footer */
+.footer h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Estilo de las listas */
+.footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+.footer ul a {
+    display: block; /* Asegura que cada enlace ocupe toda la línea */
+    color: #ccc; /* Color del enlace */
+    text-decoration: none; /* Sin subrayado */
+    margin-bottom: 8px;
+    transition: color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+/* Efecto hover en enlaces */
+.footer ul a:hover {
+    color: #fff; /* Cambia a blanco cuando se pase el cursor */
+}
+
+/* Estilo de la sección inferior del footer */
+.footer .text-center p {
+    margin: 0;
+    font-size: 14px;
+    color: #bbb; /* Texto ligeramente más claro */
+}
+
+/* Asegura un buen diseño responsivo */
+.footer .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer .col-md-6 {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .footer .col-md-6 {
+        text-align: center; /* Centra el contenido en pantallas pequeñas */
+    }
+
+    .footer ul a {
+        margin-bottom: 10px;
+    }
+}
 
 footer {
     background-color: #1c1b1b;
@@ -218,6 +332,11 @@ nav a {
 }
 
 
+.noresultado {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos hijos estén uno debajo del otro */
+    gap: 20px; /* Añade espacio entre elementos */
+}
 
 .alert {
     margin-bottom: 20px; /* Añade margen inferior a la alerta para separarla */
@@ -242,6 +361,21 @@ nav a {
     height: auto;
     margin-bottom: 15px;
 }
+.no-results p {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 360px; /* Mueve el contenido a la derecha */
+}
+
+.no-results ul {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 340px; /* Mueve el contenido a la derecha */
+}
+
+.no-results li {
+    margin-bottom: 20px;
+}
 
 .suggestions-list {
     list-style-type: disc;
@@ -257,4 +391,5 @@ nav a {
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    margin-bottom: 40px;
 }
