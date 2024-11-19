@@ -33,6 +33,26 @@ nav a:hover {
     text-shadow: 1px 1px 2px #000; /* Añade un pequeño efecto de sombra */
 }
 
+.promo{
+    background: rgb(255, 255, 255);
+    border: 1px solid #1f1f1f;
+    border-radius: 5px;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+    width: 300px;
+    flex: 1 1 23%; /* Ocupa el 23% del contenedor, ajustado para 4 elementos */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    text-align: center; /* Centra el texto e imagen */
+    background: #f9f9f9; /* Fondo claro */
+    padding: 0px; /* Espaciado interno */
+    border: 1px solid #ffffff; /* Borde ligero */
+    border-radius: 10px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para contener la imagen */
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+    animation: fadeInUp 0.8s ease-in-out; /* Animación de entrada para cada tarjeta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
 
 .promotion {
     background: rgb(255, 255, 255);

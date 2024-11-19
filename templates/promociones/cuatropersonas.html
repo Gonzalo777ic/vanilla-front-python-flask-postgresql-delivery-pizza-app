@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones de Pizza</title>
+    <title>Rastreo de Ubicación del Repartidor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <!-- Encabezado con el logo y el menú -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -29,7 +30,7 @@
             <h1>PROMOCIONES</h1>
             <div class="promotions-filters">
                 <form action="{{ url_for('vertodo') }}" method="GET">
-                    <button type="submit" class="filter">VER TODO</button>
+                    <button type="submit" class="filter active">VER TODO</button>
                 </form>
                 <form action="{{ url_for('unapersona') }}" method="GET">
                     <button type="submit" class="filter active">1 PERSONA</button>
@@ -37,9 +38,7 @@
                 <form action="{{ url_for('dospersonas') }}" method="GET">
                     <button type="submit" class="filter active">2 PERSONAS</button>
                 </form>
-                <form action="{{ url_for('cuatropersonas') }}" method="GET">
-                    <button type="submit" class="filter active">3-4 PERSONAS</button>
-                </form>
+                <button class="filter">3-4 PERSONAS</button>
                 <form action="{{ url_for('cincoamas') }}" method="GET">
                     <button type="submit" class="filter active">5 A MÁS</button>
                 </form>
@@ -69,41 +68,10 @@
                 <button>COMPRAR</button>
             </div>
             <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 4">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-        </section>
-        
-        <section class="promotions">
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/superfamiliar.webp') }}" alt="Pizza 1">
-                <h2>Super Familiar</h2>
-                <p>1 Pizza superfamiliar hawaiana o pepperoni con 3 rolls de pepperoni</p>
-                <p class="price">S/ 59.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
                 <img src="{{ url_for('static', filename='images/duo.webp') }}" alt="Pizza 2">
                 <h2>Dúo</h2>
                 <p>1 pizza grande clásica o especialidad con 3 rolls de pepperoni</p>
                 <p class="price">S/ 39.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 3">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 4">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
                 <button>COMPRAR</button>
             </div>
         </section>
@@ -130,96 +98,11 @@
                 <button>COMPRAR</button>
             </div>
             <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 4">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-        </section>
-        <section class="promotions">
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/superfamiliar.webp') }}" alt="Pizza 1">
-                <h2>Super Familiar</h2>
-                <p>1 Pizza superfamiliar hawaiana o pepperoni con 3 rolls de pepperoni</p>
-                <p class="price">S/ 59.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
                 <img src="{{ url_for('static', filename='images/duo.webp') }}" alt="Pizza 2">
                 <h2>Dúo</h2>
                 <p>1 pizza grande clásica o especialidad con 3 rolls de pepperoni</p>
                 <p class="price">S/ 39.90</p> <!-- Precio añadido -->
                 <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 3">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 4">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-        </section>
-        <section class="promotions">
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/superfamiliar.webp') }}" alt="Pizza 1">
-                <h2>Super Familiar</h2>
-                <p>1 Pizza superfamiliar hawaiana o pepperoni con 3 rolls de pepperoni</p>
-                <p class="price">S/ 59.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/duo.webp') }}" alt="Pizza 2">
-                <h2>Dúo</h2>
-                <p>1 pizza grande clásica o especialidad con 3 rolls de pepperoni</p>
-                <p class="price">S/ 39.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 3">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 4">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-        </section>
-        <section class="promotions">
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/superfamiliar.webp') }}" alt="Pizza 1">
-                <h2>Super Familiar</h2>
-                <p>1 Pizza superfamiliar hawaiana o pepperoni con 3 rolls de pepperoni</p>
-                <p class="price">S/ 59.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/duo.webp') }}" alt="Pizza 2">
-                <h2>Dúo</h2>
-                <p>1 pizza grande clásica o especialidad con 3 rolls de pepperoni</p>
-                <p class="price">S/ 39.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/personal.webp') }}" alt="Pizza 3">
-                <h2>Personal</h2>
-                <p>1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa</p>
-                <p class="price">S/ 29.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promo">
             </div>
         </section>
     </main>

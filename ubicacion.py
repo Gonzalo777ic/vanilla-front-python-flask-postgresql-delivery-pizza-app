@@ -11,6 +11,30 @@ def layout():
     """Página principal para visualizar promociones y la ubicación del repartidor"""
     return render_template('layout.html')
 
+
+
+@app.route('/promociones/vertodo')
+def vertodo():
+    return render_template('promociones/vertodo.html', filter="todo")
+
+@app.route('/promociones/unapersona')
+def unapersona():
+    return render_template('promociones/unapersona.html', filter="1persona")
+
+@app.route('/promociones/dospersonas')
+def dospersonas():
+    return render_template('promociones/dospersonas.html', filter="2personas")
+
+@app.route('/promociones/cuatropersonas')
+def cuatropersonas():
+    return render_template('promociones/cuatropersonas.html', filter="3-4personas")
+
+@app.route('/promociones/cincoamas')
+def cincoamas():
+    return render_template('promociones/cincoamas.html', filter="5amas")
+
+
+
 @app.route('/contactanos')
 def contactanos():
     """Página principal para visualizar promociones y la ubicación del repartidor"""
