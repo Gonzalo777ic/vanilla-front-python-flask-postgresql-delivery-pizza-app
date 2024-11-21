@@ -13,8 +13,10 @@
                 <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
             </div>
             <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                <input type="text" name="query" value="{{ query }}" placeholder="Buscar promociones..." class="search-input">
-                <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
+                <input type="text" name="query" placeholder="Buscar" class="search-input">
+                <button type="submit" class="search-button">
+                    <img src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar">
+                </button>
             </form>
             <nav>
                 <a href="{{ url_for('index') }}">MENÚ</a>

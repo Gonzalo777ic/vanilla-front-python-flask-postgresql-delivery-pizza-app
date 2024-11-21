@@ -377,25 +377,43 @@ nav a {
     margin: 0 10px;
 }
 
+/* Contenedor del formulario de búsqueda */
 .search-form {
     display: flex;
     align-items: center;
+    background-color: #f9f9f9; /* Fondo claro */
+    border: 1px solid #000000;    /* Borde gris */
+    border-radius: 5px;        /* Bordes redondeados */
+    overflow: hidden;
+    width: 400px;              /* Ancho del contenedor */
+    height: 40px;
 }
 
+/* Campo de entrada de texto */
 .search-input {
-    padding: 5px 10px;
-    border: 1px solid #000000;
-    border-radius: 4px;
-    font-size: 14px;
-}
-.search-input {
-    margin-right: 10px;
+    flex: 1;                  /* Ocupa todo el espacio disponible */
+    padding: 10px;            /* Espaciado interno */
+    border: none;             /* Sin borde (usa el del contenedor) */
+    outline: none;            /* Sin contorno al seleccionar */
+    font-size: 14px;          /* Tamaño de fuente */
+    color: #333;              /* Color del texto */
 }
 
-
+/* Botón de búsqueda */
 .search-button {
-    width: 20px; /* Ancho del botón */
-    height: 20px; /* Alto del botón */
+    display: flex;            /* Para centrar el ícono */
+    justify-content: center;
+    align-items: center;
+    background-color: #555;   /* Fondo gris oscuro */
+    border: none;             /* Sin borde */
+    padding: 20px;            /* Espaciado interno */
+    cursor: pointer;          /* Cursor de mano al pasar */
+}
+
+.search-button img {
+    width: 16px;              /* Ancho del ícono */
+    height: 16px;             /* Alto del ícono */
+    filter: invert(1);        /* Invierte los colores para que sea blanco */
 }
 
 
