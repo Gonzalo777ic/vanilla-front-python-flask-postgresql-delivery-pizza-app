@@ -36,7 +36,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #e6e6e6;
 }
 
 header {
@@ -81,9 +81,9 @@ nav a:hover {
     flex: 1 1 23%; /* Ocupa el 23% del contenedor, ajustado para 4 elementos */
     box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
     text-align: center; /* Centra el texto e imagen */
-    background: #f9f9f9; /* Fondo claro */
+    background: #e6e6e6; /* Fondo claro */
     padding: 0px; /* Espaciado interno */
-    border: 1px solid #ffffff; /* Borde ligero */
+    border: 1px solid #e6e6e6;; /* Borde ligero */
     border-radius: 10px; /* Bordes redondeados */
     position: relative; /* Posicionamiento relativo para contener la imagen */
     overflow: hidden; /* Asegura que la imagen no se desborde */
@@ -232,7 +232,7 @@ nav a:hover {
     text-align: left;
     margin-bottom: 20px;
     margin-left: 40px; /* Mueve el contenido a la derecha */
-    margin-top: 10px; /* Ajusta el margen superior según lo necesario */
+    margin-top: 200px; /* Ajusta el margen superior según lo necesario */
     padding: 40px 0;
     margin-bottom: -40px; /* Reduce el espacio inferior del encabezado */
 }
@@ -271,12 +271,12 @@ nav a:hover {
 
 /* Cambia de color a verde y el texto a blanco cuando pasa el cursor */
 .promotions-filters .filter:hover {
-    background-color: green; /* Fondo verde */
+    background-color: #ff5722;/* Fondo verde */
     color: white; /* Letra blanca */
 }
 
 .promotions-filters .filter.active {
-    background-color: #2e6e31;
+    background-color: #ff5722;
     color: white;
     border: none;
 }
@@ -404,10 +404,13 @@ nav a {
     display: flex;            /* Para centrar el ícono */
     justify-content: center;
     align-items: center;
-    background-color: #555;   /* Fondo gris oscuro */
+    background-color: #ffffff;   /* Fondo gris oscuro */
     border: none;             /* Sin borde */
     padding: 20px;            /* Espaciado interno */
     cursor: pointer;          /* Cursor de mano al pasar */
+    width: 16px;              /* Ancho del ícono */
+    height: 16px;             /* Alto del ícono */
+    filter: invert(1);        /* Invierte los colores para que sea blanco */
 }
 
 .search-button img {
@@ -472,9 +475,65 @@ nav a {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #ff5722;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     margin-bottom: 40px;
 }
+
+.secondary-headers { 
+    position: fixed; /* Se mantiene fijo en la pantalla */
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 0; /* Elimina el margen izquierdo para que ocupe toda la pantalla */
+    margin-top: -110px; /* Ajusta el margen superior según lo necesario */
+    padding: 30px 0; /* Mantén el relleno para el alto */
+    width: 100%; /* Hace que el fondo ocupe todo el ancho de la pantalla */
+    background-color: #dfdede; /* Fondo negro */
+    color: white; /* Texto blanco */
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+}
+
+.secondary-headers h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.secondary-headers a {
+    color: #ff5722;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.secondary-filtros {
+    margin-top: -6px; /* Ajusta el margen superior según lo necesario */
+    display: flex;
+    justify-content: center; /* Alinea los botones al final (derecha) del contenedor */
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.secondary-filtros .filtro {
+    padding: 8px 15px;
+    border: 2px solid #dfdede;
+    border-radius: 20px;
+    background-color: #dfdede;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Animación suave para los cambios */
+}
+
+
+/* Cambia de color a verde y el texto a blanco cuando pasa el cursor */
+.secondary-filtros .filtro:hover {
+    background-color: #ff5722;/* Fondo verde */
+    color: white; /* Letra blanca */
+}
+
+
+
+
+

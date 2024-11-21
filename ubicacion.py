@@ -35,6 +35,29 @@ def cincoamas():
 
 
 
+@app.route('/pizzas/todo')
+def todo():
+    return render_template('pizzas/todo.html', filter="5amas")
+@app.route('/pizzas/clasicas')
+def clasicas():
+    return render_template('pizzas/clasicas.html', filter="5amas")
+@app.route('/pizzas/especialidades')
+def especialidades():
+    return render_template('pizzas/especialidades.html', filter="5amas")
+
+
+@app.route('/combos/todos')
+def todos():
+    return render_template('combos/todos.html', filter="5amas")
+@app.route('/combos/dos')
+def dos():
+    return render_template('combos/dos.html', filter="5amas")
+@app.route('/combos/cuatro')
+def cuatro():
+    return render_template('combos/cuatro.html', filter="5amas")
+
+
+
 @app.route('/contactanos')
 def contactanos():
     """Página principal para visualizar promociones y la ubicación del repartidor"""

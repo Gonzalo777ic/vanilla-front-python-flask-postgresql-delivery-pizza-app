@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones de Pizza</title>
+    <title>Rastreo de Ubicación del Repartidor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <!-- Encabezado con el logo y el menú -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -16,7 +17,6 @@
                 <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
                 <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
             </form>
-            
             <nav>
                 <a href="{{ url_for('index') }}">MENÚ</a>
                 <a href="{{ url_for('rastreo') }}">PEDIDO</a>
@@ -42,20 +42,12 @@
         <section class="promotions-header">
             <h1>PROMOCIONES</h1>
             <div class="promotions-filters">
-                <form action="{{ url_for('vertodo') }}" method="GET">
-                    <button type="submit" class="filter">VER TODO</button>
-                </form>
-                <form action="{{ url_for('unapersona') }}" method="GET">
+                <button class="filter">VER TODO</button>
+                <form action="{{ url_for('clasicas') }}" method="GET">
                     <button type="submit" class="filter active">1 PERSONA</button>
                 </form>
-                <form action="{{ url_for('dospersonas') }}" method="GET">
+                <form action="{{ url_for('especialidades') }}" method="GET">
                     <button type="submit" class="filter active">2 PERSONAS</button>
-                </form>
-                <form action="{{ url_for('cuatropersonas') }}" method="GET">
-                    <button type="submit" class="filter active">3-4 PERSONAS</button>
-                </form>
-                <form action="{{ url_for('cincoamas') }}" method="GET">
-                    <button type="submit" class="filter active">5 A MÁS</button>
                 </form>
             </div>
         </section>

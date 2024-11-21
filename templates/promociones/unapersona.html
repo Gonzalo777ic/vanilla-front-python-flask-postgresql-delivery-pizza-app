@@ -25,6 +25,19 @@
         </div>
     </header>
     <main>
+        <section class="secondary-headers">
+            <div class="secondary-filtros">
+                <form action="{{ url_for('vertodo') }}" method="GET">
+                    <button type="submit" class="filtro">PROMOCIONES</button>
+                </form>
+                <form action="{{ url_for('unapersona') }}" method="GET">
+                    <button type="submit" class="filtro activo">PIZZAS</button>
+                </form>
+                <form action="{{ url_for('dospersonas') }}" method="GET">
+                    <button type="submit" class="filtro activo">COMBOS</button>
+                </form>
+            </div>
+        </section>
         <!-- Contenido principal del index -->
         <section class="promotions-header">
             <h1>PROMOCIONES</h1>
