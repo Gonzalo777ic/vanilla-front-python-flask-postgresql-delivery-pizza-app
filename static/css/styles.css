@@ -417,6 +417,7 @@ nav a {
     width: 16px;              /* Ancho del ícono */
     height: 16px;             /* Alto del ícono */
     filter: invert(1);        /* Invierte los colores para que sea blanco */
+    background-color: #ffffff;
 }
 
 

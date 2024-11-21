@@ -30,30 +30,24 @@
                 <form action="{{ url_for('vertodo') }}" method="GET">
                     <button type="submit" class="filtro">PROMOCIONES</button>
                 </form>
-                <form action="{{ url_for('unapersona') }}" method="GET">
+                <form action="{{ url_for('todo') }}" method="GET">
                     <button type="submit" class="filtro activo">PIZZAS</button>
                 </form>
-                <form action="{{ url_for('dospersonas') }}" method="GET">
+                <form action="{{ url_for('todos') }}" method="GET">
                     <button type="submit" class="filtro activo">COMBOS</button>
                 </form>
             </div>
         </section>
         <!-- Contenido principal del index -->
         <section class="promotions-header">
-            <h1>PROMOCIONES</h1>
+            <h1>PIZZAS</h1>
             <div class="promotions-filters">
                 <form action="{{ url_for('vertodo') }}" method="GET">
                     <button type="submit" class="filter active">VER TODO</button>
                 </form>
-                <form action="{{ url_for('unapersona') }}" method="GET">
-                    <button type="submit" class="filter active">1 PERSONA</button>
-                </form>
-                <button class="filter">2 PERSONAS</button>
-                <form action="{{ url_for('cuatropersonas') }}" method="GET">
-                    <button type="submit" class="filter active">3-4 PERSONAS</button>
-                </form>
-                <form action="{{ url_for('cincoamas') }}" method="GET">
-                    <button type="submit" class="filter active">5 A MÁS</button>
+                <button class="filter">CLÁSICAS</button>
+                <form action="{{ url_for('especialidades') }}" method="GET">
+                    <button type="submit" class="filter active">ESPECIALIDADES</button>
                 </form>
             </div>
         </section>
@@ -85,21 +79,6 @@
                     <p>1 pizza grande clásica con 1 gaseosa  y  3 rolls de pepperoni</p>
                     <p class="price">S/ 29.90</p> <!-- Precio añadido -->
                     <button>COMPRAR</button>
-                </div>
-            </section>
-            <section class="promotions">
-                <div class="promotion">
-                    <img src="{{ url_for('static', filename='images/dos5.webp') }}" alt="Pizza 1">
-                    <h2>Pizza grande</h2>
-                    <p>1 pizza grande clásica con 1 gaseosa 1LT, masa artesanal y queso 100% mozzarella</p>
-                    <p class="price">S/ 25.90</p> <!-- Precio añadido -->
-                    <button>COMPRAR</button>
-                </div>
-                <div class="promo">
-                </div>
-                <div class="promo">
-                </div>
-                <div class="promo">
                 </div>
             </section>
     </main>
