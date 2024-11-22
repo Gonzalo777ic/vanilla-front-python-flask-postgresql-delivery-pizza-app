@@ -42,7 +42,7 @@
         <section class="promotions-header">
             <h1>PIZZAS</h1>
             <div class="promotions-filters">
-                <form action="{{ url_for('vertodo') }}" method="GET">
+                <form action="{{ url_for('todo') }}" method="GET">
                     <button type="submit" class="filter active">VER TODO</button>
                 </form>
                 <form action="{{ url_for('clasicas') }}" method="GET">
@@ -53,31 +53,31 @@
         </section>
             <section class="promotions">
                 <div class="promotion">
-                    <img src="{{ url_for('static', filename='images/dos1.webp') }}" alt="Pizza 1">
-                    <h2>Familiar Clásica</h2>
-                    <p>1 pizza familiar clásica con 3 rolls de pepperoni</p>
-                    <p class="price">S/ 33.90</p> <!-- Precio añadido -->
+                    <img src="{{ url_for('static', filename='images/especialidad1.webp') }}" alt="Pizza 1">
+                    <h2>Española</h2>
+                    <p>Queso mozarella, Salsa de mantequilla y ajo, Chorizo, Cebolla, y Aceitunas</p>
+                    <p class="price">S/ 23.90</p> <!-- Precio añadido -->
                     <button>COMPRAR</button>
                 </div>
                 <div class="promotion">
-                    <img src="{{ url_for('static', filename='images/dos2.webp') }}" alt="Pizza 2">
-                    <h2>Dúo Clásica</h2>
-                    <p>2 Pizzas clásicas personales con 2 gaseosas de 500ml</p>
-                    <p class="price">S/ 19.90</p> <!-- Precio añadido -->
+                    <img src="{{ url_for('static', filename='images/especialidad2.webp') }}" alt="Pizza 2">
+                    <h2>Súper Margarita 6 Quesos</h2>
+                    <p>6 Quesos, Salsa de Tomate, Orégano y Tomate</p>
+                    <p class="price">S/ 23.90</p> <!-- Precio añadido -->
                     <button>COMPRAR</button>
                 </div>
                 <div class="promotion">
-                    <img src="{{ url_for('static', filename='images/dos3.webp') }}" alt="Pizza 3">
-                    <h2>Grande Clásica</h2>
-                    <p>1 pizza grande clásica o especialidad con 3 rolls de pepperoni</p>
-                    <p class="price">S/ 39.90</p> <!-- Precio añadido -->
+                    <img src="{{ url_for('static', filename='images/especialidad3.webp') }}" alt="Pizza 3">
+                    <h2>Continentalle</h2>
+                    <p>Queso Mozzarella, Jamón, Salsa de Tomate, Champiñones y Cebolla</p>
+                    <p class="price">S/ 23.90</p> <!-- Precio añadido -->
                     <button>COMPRAR</button>
                 </div>
                 <div class="promotion">
-                    <img src="{{ url_for('static', filename='images/dos4.webp') }}" alt="Pizza 2">
-                    <h2>Combinación Clásica</h2>
-                    <p>1 pizza grande clásica con 1 gaseosa  y  3 rolls de pepperoni</p>
-                    <p class="price">S/ 29.90</p> <!-- Precio añadido -->
+                    <img src="{{ url_for('static', filename='images/especialidad4.webp') }}" alt="Pizza 2">
+                    <h2>Hawaiana</h2>
+                    <p>Queso mozzarella, salsa de tomate especial, Jamón y Piña</p>
+                    <p class="price">S/ 23.90</p> <!-- Precio añadido -->
                     <button>COMPRAR</button>
                 </div>
             </section>
