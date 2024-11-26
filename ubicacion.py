@@ -1,71 +1,87 @@
 from flask import Flask, request, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
+
+IMAGE_PATH = 'images/'
+
 
 # Base de datos simulada para almacenar la ubicación del repartidor
 ubicacion_repartidor = {"lat": None, "lon": None}
 
+
+
+# Datos de promociones
+promotions_data = {
+    "5mas": [
+        {
+            'title': 'Martes Pidete Dúo Familiar',
+            'description': '2 Pizzas Familiares Clásicas con 1 Gaseosa 1.5L.',
+            'price': 'S/ 52.90',
+            'image': 'cinco1.webp'
+        },
+        {
+            'title': 'Superpack Familiar',
+            'description': '4 Pizzas familiares; ideal para 5-6 personas por pizza',
+            'price': 'S/ 109.90',
+            'image': 'cinco2.webp'
+        },
+        # Más promociones...
+    ],
+    "cuatropersonas": [
+        # Definir las promociones para 3-4 personas
+    ],
+    # Otras categorías de promociones...
+}
+
+@app.route('/promotions')
+def promotions():
+    # Aquí usamos la variable `promotions_data`
+    return render_template('promociones/promociones.html', promotions=promotions_data)
 
 @app.route('/')
 def layout():
     """Página principal para visualizar promociones y la ubicación del repartidor"""
     return render_template('layout.html')
 
+@app.route('/promociones')
+def promociones():
+    """Página de promociones, se puede personalizar para mostrar una categoría específica"""
+    category = request.args.get('category', '5mas')  # Usamos un parámetro para elegir la categoría
+    promotions = promotions_data.get(category, [])
+    return render_template('promociones.html', promotions=promotions)
 
-
-@app.route('/promociones/vertodo')
+@app.route('/promociones/promociones')
 def vertodo():
-    return render_template('promociones/vertodo.html', filter="todo")
-
-@app.route('/promociones/unapersona')
-def unapersona():
-    return render_template('promociones/unapersona.html', filter="1persona")
-
-@app.route('/promociones/dospersonas')
-def dospersonas():
-    return render_template('promociones/dospersonas.html', filter="2personas")
-
-@app.route('/promociones/cuatropersonas')
-def cuatropersonas():
-    return render_template('promociones/cuatropersonas.html', filter="3-4personas")
-
-@app.route('/promociones/cincoamas')
-def cincoamas():
-    return render_template('promociones/cincoamas.html', filter="5amas")
-
-
+    """Mostrar todas las promociones"""
+    all_promotions = []
+    for category in promotions_data.values():
+        all_promotions.extend(category)
+    return render_template('promociones/promociones.html', promotions=all_promotions)
 
 @app.route('/pizzas/todo')
 def todo():
     return render_template('pizzas/todo.html', filter="5amas")
+
 @app.route('/pizzas/clasicas')
 def clasicas():
     return render_template('pizzas/clasicas.html', filter="5amas")
+
 @app.route('/pizzas/especialidades')
 def especialidades():
     return render_template('pizzas/especialidades.html', filter="5amas")
 
-
 @app.route('/combos/todos')
 def todos():
     return render_template('combos/todos.html', filter="5amas")
-@app.route('/combos/dos')
-def dos():
-    return render_template('combos/dos.html', filter="5amas")
-@app.route('/combos/cuatro')
-def cuatro():
-    return render_template('combos/cuatro.html', filter="5amas")
-
-
 
 @app.route('/contactanos')
 def contactanos():
-    """Página principal para visualizar promociones y la ubicación del repartidor"""
+    """Página para contacto"""
     return render_template('contactanos.html')
 
 @app.route('/index')
 def index():
-    """Página principal para visualizar promociones y la ubicación del repartidor"""
+    """Página principal"""
     return render_template('index.html')
 
 @app.route('/rastreo')
@@ -76,11 +92,8 @@ def rastreo():
 @app.route('/search')
 def search():
     query = request.args.get('query', '')
-    # Simulación de resultados vacíos para este ejemplo
     resultados = []  # Cambia esta línea con tu lógica de búsqueda.
-    
     return render_template('search.html', query=query, resultados=resultados)
-
 
 @app.route('/actualizar_ubicacion', methods=['POST'])
 def actualizar_ubicacion():
@@ -105,4 +118,3 @@ def obtener_ubicacion():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
