@@ -104,45 +104,42 @@ nav a:hover {
 /* Contenedor principal de las promociones */
 /* Contenedor principal de las promociones */
 .promotions {
-    display: flex; /* Activa flexbox */
-    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
-    justify-content: space-between; /* Espacio uniforme entre los elementos */
-    align-items: flex-start; /* Alinea los elementos al inicio verticalmente */
-    gap: 20px; /* Espaciado entre las promociones */
-    padding: 20px; /* Espaciado interno del contenedor */
-    overflow-x: auto; /* Permite desplazamiento horizontal si es necesario */
-    animation: fadeIn 1s ease-in-out; /* Animación de entrada para el contenedor */
+    display: flex; /* Activa el modo Flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+    justify-content: space-between; /* Espacio uniforme entre las filas */
+    gap: 20px; /* Espaciado entre las tarjetas */
+    padding: 20px; /* Espaciado interno */
+    animation: fadeIn 1s ease-in-out; /* Animación de entrada */
 }
 
-/* Estilo para cada promoción */
+/* Ajuste de estilo para cada tarjeta */
 .promotion {
-    flex: 1 1 23%; /* Ocupa el 23% del contenedor, ajustado para 4 elementos */
-    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
-    text-align: center; /* Centra el texto e imagen */
+    flex: 1 1 calc(25% - 20px); /* Ocupa el 25% menos el gap (20px) */
+    box-sizing: border-box; /* Incluye padding y borde en el cálculo de tamaño */
+    text-align: center; /* Centrado del contenido */
     background: #f9f9f9; /* Fondo claro */
-    padding: 0px; /* Espaciado interno */
+    padding: 10px; /* Espaciado interno */
     border: 1px solid #bbbbbb; /* Borde ligero */
     border-radius: 10px; /* Bordes redondeados */
-    position: relative; /* Posicionamiento relativo para contener la imagen */
-    overflow: hidden; /* Asegura que la imagen no se desborde */
-    animation: fadeInUp 0.8s ease-in-out; /* Animación de entrada para cada tarjeta */
+    position: relative; /* Posicionamiento relativo */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+    animation: fadeInUp 0.8s ease-in-out; /* Animación de entrada */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
 }
 
     
-    .promotions-header h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin: 20px 0;
-    }
+.promotions-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
 
 /* Ajustes para imágenes */
 .promotion img {
-    object-fit: cover; /* Ajusta la imagen sin distorsionarla, cubriendo el área */
-    width: 100%; /* Imagen adaptada al ancho del contenedor */
-    height: auto; /* Imagen ajustada proporcionalmente */
-    border-radius: 0px; /* Sin bordes redondeados en la imagen */
-    display: block; /* Elimina el espacio debajo de la imagen */
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+    width: 100%; /* Imagen al 100% del ancho del contenedor */
+    height: auto; /* Ajuste proporcional de la altura */
+    border-radius: 10px 10px 0 0; /* Bordes redondeados solo en la parte superior */
 }
 
 /* Estilo para el título */

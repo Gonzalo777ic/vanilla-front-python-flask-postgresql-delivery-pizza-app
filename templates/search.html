@@ -14,7 +14,7 @@
             </div>
             <form action="{{ url_for('search') }}" method="GET" class="search-form">
                 <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
-                <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
+                <button type="submit" class="search-button">Buscar</button>
             </form>
             <nav>
                 <a href="{{ url_for('index') }}">MENÚ</a>
@@ -23,26 +23,27 @@
             </nav>
         </div>
     </header>
+    <form id="search-form" action="#" method="GET" class="search-form">
+        <input id="search-input" type="text" name="query" placeholder="Buscar promociones..." class="search-input">
+        <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
+    </form>    
     <main>
-        <section class="noresultado">
+        <section id="results-container">
             {% if resultados %}
-                <!-- Muestra los resultados de búsqueda aquí -->
                 {% for item in resultados %}
-                <div class="promotion">
-                    <img src="{{ url_for('static', filename='images/promotion-placeholder.png') }}" alt="{{ item.nombre }}" class="promotion-image">
-                    <h2>{{ item.nombre }}</h2>
-                    <p>{{ item.descripcion }}</p>
-                    <p class="price">{{ item.precio }}</p>
-                    <button>COMPRAR</button>
-                </div>
+                    <div class="promotion">
+                        <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="{{ item['title'] }}" class="promotion-image">
+                        <h2>{{ item['title'] }}</h2>
+                        <p>{{ item['description'] }}</p>
+                        <p class="price">{{ item['price'] }}</p>
+                        <button>COMPRAR</button>
+                    </div>
                 {% endfor %}
             {% else %}
-                <!-- Alerta de productos no encontrados -->
                 <div class="alert alert-info">
-                    <i class="icon">ℹ️</i> No podemos encontrar productos que coincidan con la selección.
+                    <i class="icon">ℹ️</i> No encontramos productos que coincidan con tu búsqueda.
                 </div>
 
-                <!-- Detalles adicionales de resultados no encontrados -->
                 <div class="no-results">
                     <img src="{{ url_for('static', filename='images/noresultado.png') }}" alt="Sin resultados" class="no-results-image">
                     <h2>NO SE HAN ENCONTRADO RESULTADOS</h2>

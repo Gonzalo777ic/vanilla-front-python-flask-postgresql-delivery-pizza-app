@@ -1,15 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__, static_folder='static')
-
-IMAGE_PATH = 'images/'
-
-
-# Base de datos simulada para almacenar la ubicación del repartidor
-ubicacion_repartidor = {"lat": None, "lon": None}
-
-
-
 # Datos de promociones
 promotions_data = {
     "5mas": [
@@ -25,12 +16,97 @@ promotions_data = {
             'price': 'S/ 109.90',
             'image': 'cinco2.webp'
         },
-        # Más promociones...
+        {
+            'title': 'Triple Pack Familiar',
+            'description': '3 Pizzas Familiares clásicas con 6 pepperoni rolls',
+            'price': 'S/ 89.90',
+            'image': 'cinco3.webp'
+        },
+        {
+            'title': 'Tripack',
+            'description': '3 pizzas grandes cualquier sabor con un complemento + 1 Gaseosa de 1.5 LT',
+            'price': 'S/ 79.90',
+            'image': 'cinco4.webp'
+        }
     ],
     "cuatropersonas": [
-        # Definir las promociones para 3-4 personas
+        {
+            'title': 'Dúo Familiar',
+            'description': '2 pizzas familiares clásicas, masa artesanal y queso 100% mozzarella',
+            'price': 'S/ 49.90',
+            'image': 'cuatro1.webp'
+        },
+        {
+            'title': 'Dúo Grande',
+            'description': '2 pizzas grandes clásicas, masa artesanal y queso 100% mozzarella',
+            'price': 'S/ 29.90',
+            'image': 'cuatro2.webp'
+        },
+        {
+            'title': 'Combo Full',
+            'description': '1 pizza grande cualquier sabor con 6 alitas o 8 rolls de manjar + 1 Gaseosa de 1 LT',
+            'price': 'S/ 39.90',
+            'image': 'cuatro3.webp'
+        },
+        {
+            'title': 'Pizza Grande',
+            'description': '2 pizzas grandes cualquier sabor con un complemento + 1 Gaseosa de 1 LT',
+            'price': 'S/ 45.90',
+            'image': 'cuatro4.webp'
+        }
     ],
-    # Otras categorías de promociones...
+    "dospersonas": [
+        {
+            'title': 'Familiar Clásica',
+            'description': '1 pizza familiar clásica con 3 rolls de pepperoni',
+            'price': 'S/ 33.90',
+            'image': 'dos1.webp'
+        },
+        {
+            'title': 'Dúo Clásica',
+            'description': '2 Pizzas clásicas personales con 2 gaseosas de 500ml',
+            'price': 'S/ 19.90',
+            'image': 'dos2.webp'
+        },
+        {
+            'title': 'Grande Clásica',
+            'description': '1 pizza grande clásica o especialidad con 3 rolls de pepperoni',
+            'price': 'S/ 39.90',
+            'image': 'dos3.webp'
+        },
+        {
+            'title': 'Combinación Clásica',
+            'description': '1 pizza grande clásica con 1 gaseosa y 3 rolls de pepperoni',
+            'price': 'S/ 29.90',
+            'image': 'dos4.webp'
+        },
+        {
+            'title': 'Pizza grande',
+            'description': '1 pizza grande clásica con 1 gaseosa 1LT, masa artesanal y queso 100% mozzarella',
+            'price': 'S/ 25.90',
+            'image': 'dos5.webp'
+        }
+    ],
+    "unapersona": [
+        {
+            'title': 'Combo Mediano Full',
+            'description': '1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa',
+            'price': 'S/ 20.90',
+            'image': 'personal.webp'
+        },
+        {
+            'title': 'Combo Personal Full',
+            'description': 'Pizza personal clásica con 3 rolls de pepperoni y gaseosa',
+            'price': 'S/ 15.90',
+            'image': 'personalFull.webp'
+        },
+        {
+            'title': 'Combo Personal Clásico',
+            'description': '1 Pizza clásica personal con 1 gaseosa de 500ml',
+            'price': 'S/ 10.90',
+            'image': 'personalclasico.webp'
+        }
+    ]
 }
 
 @app.route('/promotions')
@@ -91,9 +167,21 @@ def rastreo():
 
 @app.route('/search')
 def search():
-    query = request.args.get('query', '')
-    resultados = []  # Cambia esta línea con tu lógica de búsqueda.
+    query = request.args.get('query', '').strip().lower()
+    resultados = []
+
+    if query:  # Si hay una consulta de búsqueda
+        # Combinar todas las promociones en una lista
+        all_promotions = [promo for category in promotions_data.values() for promo in category]
+
+        # Filtrar las promociones que coincidan con la consulta
+        resultados = [
+            promo for promo in all_promotions
+            if query in promo['title'].lower() or query in promo['description'].lower()
+        ]
+
     return render_template('search.html', query=query, resultados=resultados)
+
 
 @app.route('/actualizar_ubicacion', methods=['POST'])
 def actualizar_ubicacion():

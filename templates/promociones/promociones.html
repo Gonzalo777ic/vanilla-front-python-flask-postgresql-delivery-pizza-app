@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promociones</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -52,18 +53,7 @@
         </section>
         
         <section class="promotions" id="promotionsContainer">
-            {% for promotion in promotions %}
-                <div class="promotion">
-                    <img src="{{ url_for('static', filename='images/' + promotion.image) }}" alt="{{ promotion.title }}">
-                    <p>URL Generada: {{ url_for('static', filename='images/' + promotion.image) }}</p>
-                    <h2>{{ promotion.title }}</h2>
-                    <p>{{ promotion.description }}</p>
-                    <p class="price">{{ promotion.price }}</p>
-                    <button>COMPRAR</button>
-                </div>
-            {% else %}
-                <p>No hay promociones disponibles.</p>
-            {% endfor %}
+            
         </section>
     </main>
     <footer class="footer bg-dark text-light py-4">

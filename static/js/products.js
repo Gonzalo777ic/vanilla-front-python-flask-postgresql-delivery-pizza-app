@@ -16,26 +16,26 @@ document.addEventListener('DOMContentLoaded', function () {
             {
                 title: 'Martes Pidete Dúo Familiar',
                 description: '2 Pizzas Familiares Clásicas con 1 Gaseosa 1.5L.',
-                price: 'S/ 52.90PICHULAS',
-                image: 'images/cinco1.webp'
+                price: 'S/ 52.90',
+                image: '../static/images/cinco1.webp'
             },
             {
                 title: 'Superpack Familiar',
                 description: '4 Pizzas familiares; ideal para 5-6 personas por pizza',
                 price: 'S/ 109.90',
-                image: 'cinco2.webp'
+                image: '../static/images/cinco2.webp'
             },
             {
                 title: 'Triple Pack Familiar',
                 description: '3 Pizzas Familiares clásicas con 6 pepperoni rolls',
                 price: 'S/ 89.90',
-                image: 'cinco3.webp'
+                image: '../static/images/cinco3.webp'
             },
             {
                 title: 'Tripack',
                 description: '3 pizzas grandes cualquier sabor con un complemento + 1 Gaseosa de 1.5 LT',
                 price: 'S/ 79.90',
-                image: 'cinco4.webp'
+                image: '../static/images/cinco4.webp'
             }
         ],
         "cuatropersonas": [
@@ -43,25 +43,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: 'Dúo Familiar',
                 description: '2 pizzas familiares clásicas, masa artesanal y queso 100% mozzarella',
                 price: 'S/ 49.90',
-                image: 'cuatro1.webp'
+                image: '../static/images/cuatro1.webp'
             },
             {
                 title: 'Dúo Grande',
                 description: '2 pizzas grandes clásicas, masa artesanal y queso 100% mozzarella',
                 price: 'S/ 29.90',
-                image: 'cuatro2.webp'
+                image: '../static/images/cuatro2.webp'
             },
             {
                 title: 'Combo Full',
                 description: '1 pizza grande cualquier sabor con 6 alitas o 8 rolls de manjar + 1 Gaseosa de 1 LT',
                 price: 'S/ 39.90',
-                image: 'cuatro3.webp'
+                image: '../static/images/cuatro3.webp'
             },
             {
                 title: 'Pizza Grande',
                 description: '2 pizzas grandes cualquier sabor con un complemento + 1 Gaseosa de 1 LT',
                 price: 'S/ 45.90',
-                image: 'cuatro4.webp'
+                image: '../static/images/cuatro4.webp'
             }
         ],
         "dospersonas": [
@@ -69,31 +69,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: 'Familiar Clásica',
                 description: '1 pizza familiar clásica con 3 rolls de pepperoni',
                 price: 'S/ 33.90',
-                image: 'dos1.webp'
+                image: '../static/images/dos1.webp'
             },
             {
                 title: 'Dúo Clásica',
                 description: '2 Pizzas clásicas personales con 2 gaseosas de 500ml',
                 price: 'S/ 19.90',
-                image: 'dos2.webp'
+                image: '../static/images/dos2.webp'
             },
             {
                 title: 'Grande Clásica',
                 description: '1 pizza grande clásica o especialidad con 3 rolls de pepperoni',
                 price: 'S/ 39.90',
-                image: 'dos3.webp'
+                image: '../static/images/dos3.webp'
             },
             {
                 title: 'Combinación Clásica',
                 description: '1 pizza grande clásica con 1 gaseosa y 3 rolls de pepperoni',
                 price: 'S/ 29.90',
-                image: 'dos4.webp'
+                image: '../static/images/dos4.webp'
             },
             {
                 title: 'Pizza grande',
                 description: '1 pizza grande clásica con 1 gaseosa 1LT, masa artesanal y queso 100% mozzarella',
                 price: 'S/ 25.90',
-                image: 'dos5.webp'
+                image: '../static/images/dos5.webp'
             }
         ],
         "unapersona": [
@@ -101,22 +101,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: 'Combo Mediano Full',
                 description: '1 Pizza mediana clásica con 3 rolls de pepperoni y gaseosa',
                 price: 'S/ 20.90',
-                image: 'personal.webp'
+                image: '../static/images/personal.webp'
             },
             {
                 title: 'Combo Personal Full',
                 description: 'Pizza personal clásica con 3 rolls de pepperoni y gaseosa',
                 price: 'S/ 15.90',
-                image: 'personalFull.webp'
+                image: '../static/images/personalFull.webp'
             },
             {
                 title: 'Combo Personal Clásico',
                 description: '1 Pizza clásica personal con 1 gaseosa de 500ml',
                 price: 'S/ 10.90',
-                image: 'personalclasico.webp'
+                image: '../static/images/personalclasico.webp'
             }
         ]
     };
+    
     
     function getPromotions(route) {
         const selectedPromotions = promotionsData[route] || promotionsData['5mas']; // '5mas' es la opción por defecto
