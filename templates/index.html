@@ -2,25 +2,34 @@
 
 {% block title %}Promociones - Pizza Delivery{% endblock %}
 
+
 {% block content %}
+
+    <!-- Animación de carga -->
+    <div id="loading-screen" class="loading-screen">
+        <h1>Isique et al Productions</h1>
+    </div>
 
     <!-- Incluir el navbar específico para promociones -->
     {% include 'navbar.html' %}
+
     <section class="promotions">
-    {% for category, promotions in promotions_data.items() %}
+        {% for category, promotions in promotions_data.items() %}
         <div class="promotion-category">
             <div class="promotion-items">
                 {% for promotion in promotions %}
-                    <div class="promotion">
-                        <img src="{{ url_for('static', filename=promotion.image) }}" alt="{{ promotion.title }}">
-                        <h3>{{ promotion.title }}</h3>
-                        <p>{{ promotion.description }}</p>
-                        <p class="price">{{ promotion.price }}</p> <!-- Precio añadido -->
-                        <button>COMPRAR</button>
-                    </div>
+                <div class="promotion">
+                    <img src="{{ url_for('static', filename=promotion.image) }}" alt="{{ promotion.title }}">
+                    <h3>{{ promotion.title }}</h3>
+                    <p>{{ promotion.description }}</p>
+                    <p class="price">{{ promotion.price }}</p> <!-- Precio añadido -->
+                    <button>COMPRAR</button>
+                </div>
                 {% endfor %}
             </div>
         </div>
-    {% endfor %}
-</section>
+        {% endfor %}
+    </section>
+    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
+
 {% endblock %}

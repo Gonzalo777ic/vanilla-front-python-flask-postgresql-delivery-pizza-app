@@ -110,7 +110,6 @@ promotions_data = {
 }
 
 
-@app.route('/')
 @app.route('/promociones/promociones')
 def promociones():
     """Mostrar todas las promociones"""
@@ -118,6 +117,14 @@ def promociones():
     for category in promotions_data.values():
         all_promotions.extend(category)
     return render_template('promociones/promociones.html', promotions=all_promotions)
+
+@app.route('/pizzas/todo')
+def vertodo():
+    return render_template('pizzas/todo.html')
+
+@app.route('/combos/todos')
+def todos():
+    return render_template('combos/todos.html', filter="5amas")
 
 # Plantillas
 @app.route('/miPlantilla')
@@ -131,9 +138,7 @@ def navbar():
     return render_template('navbar.html')
 
 
-@app.route('/pizzas/todo')
-def todo():
-    return render_template('pizzas/todo.html', filter="5amas")
+
 
 @app.route('/pizzas/clasicas')
 def clasicas():
@@ -143,15 +148,14 @@ def clasicas():
 def especialidades():
     return render_template('pizzas/especialidades.html', filter="5amas")
 
-@app.route('/combos/todos')
-def todos():
-    return render_template('combos/todos.html', filter="5amas")
+
 
 @app.route('/contactanos')
 def contactanos():
     """Página para contacto"""
     return render_template('contactanos.html')
 
+@app.route('/')
 @app.route('/index')
 def index():
     """Página principal"""

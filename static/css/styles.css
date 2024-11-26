@@ -1,3 +1,27 @@
+/* Estilos para la pantalla de carga */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad */
+    z-index: 9999; /* Asegura que se muestre encima de todo */
+    opacity: 1;
+    transition: opacity 1.5s ease-out; /* Transición para desvanecer */
+}
+
+.loading-screen h1 {
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Elimina la animación fadeIn */
+}
+
 /* Para el header */
 header {
     background-color: rgb(255, 255, 255);
