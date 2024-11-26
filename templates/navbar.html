@@ -1,0 +1,15 @@
+
+<!-- navbar.html -->
+<section class="secondary-headers">
+    <div class="secondary-filtros">
+        <form action="{{ url_for('promociones') }}" method="GET">
+            <button type="submit" class="filtro">PROMOCIONES</button>
+        </form>
+        <form action="{{ url_for('todo') }}" method="GET">
+            <button type="submit" class="filtro activo">PIZZAS</button>
+        </form>
+        <form action="{{ url_for('todos') }}" method="GET">
+            <button type="submit" class="filtro activo">COMBOS</button>
+        </form>
+    </div>
+</section>

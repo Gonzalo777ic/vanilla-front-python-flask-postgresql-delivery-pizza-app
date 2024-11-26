@@ -1,3 +1,44 @@
+/* Para el header */
+header {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px 0px;
+    display: block;
+    font-family: Arial, sans-serif;
+    height: 80px; /* Ajusta la altura */
+    left: 0px;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    width: 100%; /* Ajusta el ancho al 100% */
+    z-index: 1000;
+}
+
+
+/* Para el section */
+.secondary-headers {
+    background-color: rgb(223, 222, 222); /* Fondo gris claro */
+    color: rgb(255, 255, 255); /* Texto blanco */
+    display: block;
+    font-family: Arial, sans-serif;
+    height: 40px; /* Ajusta la altura */
+    margin-bottom: 20px; /* Espacio inferior */
+    margin-top: 0;  /* Eliminar margen superior */
+    padding: 30px 0; /* Ajustar relleno para control de altura */
+    position: fixed; /* Fijar el elemento en la pantalla */
+    top: 103px; /* Ajustar la distancia para no solaparse con el header fijo */
+    left: 0; /* Alineación al borde izquierdo */
+    width: 100%; /* Asegura que cubra todo el ancho */
+    text-align: left; /* Alineación a la izquierda */
+    z-index: 999; /* Asegura que no se solape con otros elementos */
+}
+
+/* Ajustar el contenido principal */
+main {
+    padding-top: 120px; /* Asegura que el contenido no quede oculto debajo del header fijo */
+}
+
+
 .header-container {
     display: flex;
     align-items: center;
@@ -7,6 +48,8 @@
 main {
     margin-top: 100px; /* Ajustar según la altura del header */
 }
+
+
 nav a {
     margin: 0 10px;
     text-decoration: none;
@@ -39,15 +82,12 @@ body {
     background-color: #e6e6e6;
 }
 
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+html {
+    margin: 0;
+    padding: 0;
 }
+
+
 
 nav a {
     color: rgb(19, 18, 18);
@@ -229,7 +269,7 @@ nav a:hover {
     text-align: left;
     margin-bottom: 20px;
     margin-left: 40px; /* Mueve el contenido a la derecha */
-    margin-top: 200px; /* Ajusta el margen superior según lo necesario */
+    margin-top: 0; /* Ajusta el margen superior según lo necesario */
     padding: 40px 0;
     margin-bottom: -40px; /* Reduce el espacio inferior del encabezado */
 }
@@ -480,18 +520,7 @@ nav a {
     margin-bottom: 40px;
 }
 
-.secondary-headers { 
-    position: fixed; /* Se mantiene fijo en la pantalla */
-    text-align: left;
-    margin-bottom: 20px;
-    margin-left: 0; /* Elimina el margen izquierdo para que ocupe toda la pantalla */
-    margin-top: -110px; /* Ajusta el margen superior según lo necesario */
-    padding: 30px 0; /* Mantén el relleno para el alto */
-    width: 100%; /* Hace que el fondo ocupe todo el ancho de la pantalla */
-    background-color: #dfdede; /* Fondo negro */
-    color: white; /* Texto blanco */
-    z-index: 1000; /* Asegura que esté sobre otros elementos */
-}
+
 
 .secondary-headers h1 {
     font-size: 24px;

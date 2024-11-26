@@ -1,44 +1,11 @@
-<!DOCTYPE html>  
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones</title>
+{% extends 'layout.html' %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <!-- Encabezado con el logo y el menú -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
-            </div>
-            <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
-                <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
-            </form>
-            <nav>
-                <a href="{{ url_for('index') }}">MENÚ</a>
-                <a href="{{ url_for('rastreo') }}">PEDIDO</a>
-                <a href="">UBICACIÓN</a>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <section class="secondary-headers">
-            <div class="secondary-filtros">
-                <form action="{{ url_for('vertodo') }}" method="GET">
-                    <button type="submit" class="filtro">PROMOCIONES</button>
-                </form>
-                <form action="{{ url_for('todo') }}" method="GET">
-                    <button type="submit" class="filtro activo">PIZZAS</button>
-                </form>
-                <form action="{{ url_for('todos') }}" method="GET">
-                    <button type="submit" class="filtro activo">COMBOS</button>
-                </form>
-            </div>
-        </section>
+{% block title %}Promociones - Pizza Delivery{% endblock %}
+
+{% block content %}
+
+    <!-- Incluir el navbar específico para promociones -->
+    {% include 'navbar.html' %}
 
         <!-- Contenido principal de promociones -->
         <section class="promotions-header">
@@ -51,7 +18,7 @@
                 <button id="cincoamasButton" class="filter">5 A MÁS</button>
             </div>
         </section>
-        
+
         <section class="promotions" id="promotionsContainer">
             
         </section>
@@ -98,3 +65,4 @@
     <script src="{{ url_for('static', filename='js/products.js') }}"></script>
 </body>
 </html>
+{% endblock %}
