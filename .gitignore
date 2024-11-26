@@ -1,0 +1,22 @@
+# Ignorar el entorno virtual
+venv
+
+# Ignorar archivos de compilación y logs de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos de configuración del sistema operativo
+.DS_Store           # macOS
+Thumbs.db           # Windows
+
+# Ignorar archivos de configuración de IDEs comunes
+.vscode/            # Visual Studio Code
+.idea/              # JetBrains IDEs (PyCharm, IntelliJ)
+
+# Ignorar archivos de configuración de herramientas
+*.log               # Archivos de logs
+*.bak               # Archivos de respaldo
+
+# Ignorar archivos de bases de datos locales
+*.sqlite3
