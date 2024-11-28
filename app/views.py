@@ -50,19 +50,50 @@ def promociones():
 
     return render_template('promociones/promociones.html', promotions_data=promotions_data)
 
+from flask import render_template, request
+from .models import Promotion, Pizza
+
 @views_blueprint.route('/search')
 def search():
     query = request.args.get('query', '').strip().lower()  # Obtener la consulta de búsqueda
     resultados = []
 
     if query:
-        # Filtrar directamente desde la base de datos usando LIKE para que la búsqueda sea eficiente
-        resultados = Promotion.query.filter(
+        # Buscar en las promociones
+        promociones_resultados = Promotion.query.filter(
             (Promotion.title.ilike(f"%{query}%")) | 
             (Promotion.description.ilike(f"%{query}%"))
         ).all()
 
+        # Buscar en las pizzas (suponiendo que hay un modelo llamado Pizza)
+        pizzas_resultados = Pizza.query.filter(
+            (Pizza.name.ilike(f"%{query}%")) | 
+            (Pizza.description.ilike(f"%{query}%"))
+        ).all()
+
+        # Combinar los resultados de promociones y pizzas
+        resultados = []
+        
+        for promo in promociones_resultados:
+            resultados.append({
+                'type': 'promotion',
+                'title': promo.title,
+                'description': promo.description,
+                'image': promo.image,
+                'price': promo.price
+            })
+        
+        for pizza in pizzas_resultados:
+            resultados.append({
+                'type': 'pizza',
+                'title': pizza.name,
+                'description': pizza.description,
+                'image': pizza.image,
+                'price': pizza.price
+            })
+
     return render_template('search.html', query=query, resultados=resultados)
+
 
 @views_blueprint.route('/pizzas/pizzas', methods=['GET'])
 def mostrar_pizzas():

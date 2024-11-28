@@ -12,7 +12,10 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
+                <!-- Envolvemos la imagen del logo en un enlace que redirige a la raíz -->
+                <a href="{{ url_for('views.index') }}">
+                    <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
+                </a>
             </div>
             <form action="{{ url_for('views.search') }}" method="GET" class="search-form">
                 <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
@@ -31,3 +34,4 @@
     </main>
 </body>
 </html>
+<!--Isique-->
