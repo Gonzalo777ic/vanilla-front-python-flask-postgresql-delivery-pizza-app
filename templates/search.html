@@ -1,74 +1,29 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones de Pizza</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
-            </div>
-            <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
-                <button type="submit" class="search-button">Buscar</button>
-            </form>
-            <nav>
-                <a href="{{ url_for('index') }}">MENÚ</a>
-                <a href="{{ url_for('rastreo') }}">PEDIDO</a>
-                <a href="#">UBICACIÓN</a>
-            </nav>
-        </div>
-    </header>
-    <form id="search-form" action="#" method="GET" class="search-form">
-        <input id="search-input" type="text" name="query" placeholder="Buscar promociones..." class="search-input">
-        <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
-    </form>    
-    <main>
-        <section id="results-container">
-            {% if resultados %}
-                {% for item in resultados %}
-                    <div class="promotion">
-                        <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="{{ item['title'] }}" class="promotion-image">
-                        <h2>{{ item['title'] }}</h2>
-                        <p>{{ item['description'] }}</p>
-                        <p class="price">{{ item['price'] }}</p>
-                        <button>COMPRAR</button>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="alert alert-info">
-                    <i class="icon">ℹ️</i> No encontramos productos que coincidan con tu búsqueda.
-                </div>
+{% extends 'layout.html' %}
 
-                <div class="no-results">
-                    <img src="{{ url_for('static', filename='images/noresultado.png') }}" alt="Sin resultados" class="no-results-image">
-                    <h2>NO SE HAN ENCONTRADO RESULTADOS</h2>
-                    <p class="suggestions-title">Sugerencia de búsqueda</p>
-                    <ul class="suggestions-list">
-                        <li>Comprueba que hayas escrito todo correctamente, o bien, intenta cambiar la ortografía de alguna de las palabras.</li>
-                        <li>Limita tu búsqueda a 1 o 2 términos.</li>
-                        <li>No seas tan específico. Usa más términos generales de búsqueda para poder encontrar productos similares.</li>
-                    </ul>
-                    <a href="{{ url_for('index') }}" class="home-button">IR AL MENÚ</a>
+{% block title %}Promociones - Pizza Delivery{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+
+    <section id="results-container">
+        {% if resultados %}
+            {% for item in resultados %}
+                <div class="promotion">
+                    <img src="{{ url_for('static', filename=item['image']) }}" alt="{{ item['title'] }}" class="promotion-image">
+                    <h2>{{ item.title }}</h2>
+                    <p>{{ item.description }}</p>
+                    <p class="price">{{ item.price }}</p>
+                    <button>COMPRAR</button>
                 </div>
-            {% endif %}
-        </section>
-    </main>
-    <footer class="bg-dark text-light py-4"> 
-        <div class="container text-center">
-            <p>
-                Contacto: 
-                <a href="mailto:info@tusistema.com" class="text-white text-decoration-none">
-                    info@tusistema.com
-                </a> 
-                | Teléfono: +51 123 456 789
-            </p>
-            <p class="mb-0">&copy; 2024 PIZZA. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-</body>
-</html>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                <i class="icon">ℹ️</i> No encontramos productos que coincidan con tu búsqueda.
+            </div>
+        {% endif %}
+    </section>
+
+    {% include 'footer.html' %}
+{% endblock %}

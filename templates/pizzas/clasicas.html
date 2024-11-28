@@ -13,7 +13,7 @@
             <div class="logo">
                 <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
             </div>
-            <form action="{{ url_for('search') }}" method="GET" class="search-form">
+            <form action="{{ url_for('views.search') }}" method="GET" class="search-form">
                 <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
                 <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
             </form>
@@ -27,13 +27,13 @@
     <main>
         <section class="secondary-headers">
             <div class="secondary-filtros">
-                <form action="{{ url_for('promociones') }}" method="GET">
+                <form action="{{ url_for('views.promociones') }}" method="GET">
                     <button type="submit" class="filtro">PROMOCIONES</button>
                 </form>
-                <form action="{{ url_for('vertodo') }}" method="GET">
+                <form action="{{ url_for('views.vertodo') }}" method="GET">
                     <button type="submit" class="filtro activo">PIZZAS</button>
                 </form>
-                <form action="{{ url_for('todos') }}" method="GET">
+                <form action="{{ url_for('views.todos') }}" method="GET">
                     <button type="submit" class="filtro activo">COMBOS</button>
                 </form>
             </div>
@@ -42,7 +42,7 @@
         <section class="promotions-header">
             <h1>PIZZAS</h1>
             <div class="promotions-filters">
-                <form action="{{ url_for('vertodo') }}" method="GET">
+                <form action="{{ url_for('views.vertodo') }}" method="GET">
                     <button type="submit" class="filter active">VER TODO</button>
                 </form>
                 <button class="filter">CLÁSICAS</button>

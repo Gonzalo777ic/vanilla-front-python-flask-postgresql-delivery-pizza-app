@@ -1,35 +1,76 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 
 {% block title %}Promociones - Pizza Delivery{% endblock %}
 
-
 {% block content %}
+<!-- Incluir el navbar específico para promociones -->
+{% include 'navbar.html' %}
 
-    <!-- Animación de carga -->
-    <div id="loading-screen" class="loading-screen">
-        <h1>Isique et al Productions</h1>
+<!-- Contenido principal de promociones -->
+<section class="promotions-header">
+    <h1>PROMOCIONES</h1>
+    <div class="promotions-filters">
+        <button id="verTodoButton" class="filter" data-category="ver_todo">VER TODO</button>
+        <button id="unapersonaButton" class="filter" data-category="unapersona">1 PERSONA</button>
+        <button id="dospersonasButton" class="filter" data-category="dospersonas">2 PERSONAS</button>
+        <button id="cuatropersonasButton" class="filter" data-category="cuatropersonas">3-4 PERSONAS</button>
+        <button id="cincoamasButton" class="filter" data-category="5mas">5 A MÁS</button>
+             
     </div>
+</section>
 
-    <!-- Incluir el navbar específico para promociones -->
-    {% include 'navbar.html' %}
-
-    <section class="promotions">
-        {% for category, promotions in promotions_data.items() %}
-        <div class="promotion-category">
-            <div class="promotion-items">
-                {% for promotion in promotions %}
-                <div class="promotion">
+<!-- Mostrar promociones con sus categorías -->
+<div class="promotions-container">
+    {% for category, promotions in promotions_data.items() %}
+        <h2>{{ category }}</h2>
+        <div class="category-promotions">
+            {% for promotion in promotions %}
+                <div class="promotion" data-category="{{ promotion.category_relationship.name|lower }}">
                     <img src="{{ url_for('static', filename=promotion.image) }}" alt="{{ promotion.title }}">
                     <h3>{{ promotion.title }}</h3>
                     <p>{{ promotion.description }}</p>
-                    <p class="price">{{ promotion.price }}</p> <!-- Precio añadido -->
+                    <p class="price">${{ promotion.price }}</p>
+                    <p class="category">Categoría: {{ promotion.category_relationship.name }}</p>
                     <button>COMPRAR</button>
                 </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </section>
-    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log('Contenido cargado');
+        const filterButtons = document.querySelectorAll('.filter');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const filterType = button.getAttribute('data-category'); // Usamos el valor de data-category para filtrar.
+                console.log('Filtro seleccionado: ', filterType);  // Verifica qué filtro se seleccionó.
+        
+                if (filterType === 'ver_todo') {
+                    document.querySelectorAll('.promotion').forEach(promo => {
+                        promo.style.display = 'block';  // Muestra todas las promociones
+                    });
+                } else {
+                    document.querySelectorAll('.promotion').forEach(promo => {
+                        const category = promo.getAttribute('data-category');  // Obtiene la categoría de cada promoción
+                        console.log('Categoría de la promoción:', category);  // Verifica qué categoría se obtiene.
+                        
+                        if (category === filterType) {
+                            promo.style.display = 'block';  // Muestra las promociones de la categoría seleccionada
+                        } else {
+                            promo.style.display = 'none';  // Oculta las promociones que no coinciden
+                        }
+                    });
+                }
+            });
+        });
+    });
+    
+</script>
+
 
 {% endblock %}
+

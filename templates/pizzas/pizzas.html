@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}Pizzas - Pizza Delivery{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+
+<section class="promotions-header">
+    <h1>PIZZAS</h1>
+    <div class="promotions-filters">
+        <form method="GET" action="{{ url_for('views.mostrar_pizzas') }}">
+            <button type="submit" name="category" value="" class="filter">VER TODO</button>
+            <button type="submit" name="category" value="6" class="filter">CLÁSICAS</button>
+            <button type="submit" name="category" value="5" class="filter">ESPECIALIDADES</button>
+        </form>
+    </div>
+</section>
+
+<!-- Mostrar todas las pizzas -->
+<section class="promotions">
+    {% for pizza in pizzas %}
+        <div class="promotion" data-category="{{ pizza.category_id }}">
+            <img src="{{ url_for('static', filename=pizza.image) }}" alt="{{ pizza.name }}">
+            <h2>{{ pizza.name }}</h2>
+            <p>{{ pizza.description }}</p>
+            <p class="price">S/ {{ pizza.price }}</p>
+            <button>COMPRAR</button>
+        </div>
+    {% endfor %}
+</section>
+{% include 'footer.html' %}
+{% endblock %}

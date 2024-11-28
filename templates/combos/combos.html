@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rastreo de Ubicación del Repartidor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href=".../css/styles.css">
 </head>
 <body>
     <!-- Encabezado con el logo y el menú -->
@@ -28,89 +27,58 @@
     <main>
         <section class="secondary-headers">
             <div class="secondary-filtros">
-                <form action="{{ url_for('promociones') }}" method="GET">
+                <form action="{{ url_for('views.vertodo') }}" method="GET">
                     <button type="submit" class="filtro">PROMOCIONES</button>
                 </form>
-                <form action="{{ url_for('vertodo') }}" method="GET">
+                <form action="{{ url_for('todo') }}" method="GET">
                     <button type="submit" class="filtro activo">PIZZAS</button>
                 </form>
-                <form action="{{ url_for('todos') }}" method="GET">
+                <form action="{{ url_for('views.todos') }}" method="GET">
                     <button type="submit" class="filtro activo">COMBOS</button>
                 </form>
             </div>
         </section>
         <!-- Contenido principal del index -->
         <section class="promotions-header">
-            <h1>PIZZAS</h1>
+            <h1>COMBO</h1>
             <div class="promotions-filters">
                 <button class="filter">VER TODO</button>
-                <form action="{{ url_for('clasicas') }}" method="GET">
-                    <button type="submit" class="filter active">CLÁSICAS</button>
+                <form action="{{ url_for('dos') }}" method="GET">
+                    <button type="submit" class="filter active">2 PERSONAS</button>
                 </form>
-                <form action="{{ url_for('especialidades') }}" method="GET">
-                    <button type="submit" class="filter active">ESPECIALIDADES</button>
+                <form action="{{ url_for('cuatro') }}" method="GET">
+                    <button type="submit" class="filter active">3-4 PERSONAS</button>
                 </form>
             </div>
         </section>
         
         <section class="promotions">
             <div class="promotion">
-                <img src="{{ url_for('static', filename='images/clasicas1.webp') }}" alt="Pizza 1">
-                <h2>Mozarrella</h2>
-                <p>Doble Queso de mozzarella y Salsa de Tomate</p>
-                <p class="price">S/ 19.90</p> <!-- Precio añadido -->
+                <img src="{{ url_for('static', filename='images/combo31.webp') }}" alt="Pizza 1">
+                <h2>Combo 2 Pizzas Familiares</h2>
+                <p>2 Pizza familiares clásicas con complemento  y gaseosa 1.5LT</p>
+                <p class="price">S/ 69.90</p> <!-- Precio añadido -->
                 <button>COMPRAR</button>
             </div>
             <div class="promotion">
-                <img src="{{ url_for('static', filename='images/clasicas2.webp') }}" alt="Pizza 2">
-                <h2>Vegetariana</h2>
-                <p>Queso Mozzarella, Salsa de Tomate, Cebolla, champiñones, Pimiento, Aceitunas y Tomates</p>
-                <p class="price">S/ 19.90</p> <!-- Precio añadido -->
+                <img src="{{ url_for('static', filename='images/combo32.webp') }}" alt="Pizza 2">
+                <h2>Combo Pizza Familiar</h2>
+                <p>1 Pizza familiar clásica con complemento y gaseosa 1LT</p>
+                <p class="price">S/ 39.90</p> <!-- Precio añadido -->
                 <button>COMPRAR</button>
             </div>
             <div class="promotion">
-                <img src="{{ url_for('static', filename='images/clasicas3.webp') }}" alt="Pizza 3">
-                <h2>Pepperoni</h2>
-                <p>Queso Mozarella, Pepperoni y Salsa de Tomate</p>
-                <p class="price">S/ 19.90</p> <!-- Precio añadido -->
+                <img src="{{ url_for('static', filename='images/combo33.webp') }}" alt="Pizza 3">
+                <h2>Combo 2 Pizzas Grandes</h2>
+                <p>2 Pizzas grandes clásicas con complemento y 1 gaseosa de 1.5LT</p>
+                <p class="price">S/ 59.90</p> <!-- Precio añadido -->
                 <button>COMPRAR</button>
             </div>
             <div class="promotion">
-                <img src="{{ url_for('static', filename='images/clasicas4.webp') }}" alt="Pizza 2">
-                <h2>Americana</h2>
-                <p>Queso mozzarella, salsa de tomate y Jamón americano</p>
-                <p class="price">S/ 19.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-        </section>
-        
-        <section class="promotions">
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/especialidad1.webp') }}" alt="Pizza 1">
-                <h2>Española</h2>
-                <p>Queso mozarella, Salsa de mantequilla y ajo, Chorizo, Cebolla, y Aceitunas</p>
-                <p class="price">S/ 23.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/especialidad2.webp') }}" alt="Pizza 2">
-                <h2>Súper Margarita 6 Quesos</h2>
-                <p>6 Quesos, Salsa de Tomate, Orégano y Tomate</p>
-                <p class="price">S/ 23.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/especialidad3.webp') }}" alt="Pizza 3">
-                <h2>Continentalle</h2>
-                <p>Queso Mozzarella, Jamón, Salsa de Tomate, Champiñones y Cebolla</p>
-                <p class="price">S/ 23.90</p> <!-- Precio añadido -->
-                <button>COMPRAR</button>
-            </div>
-            <div class="promotion">
-                <img src="{{ url_for('static', filename='images/especialidad4.webp') }}" alt="Pizza 2">
-                <h2>Hawaiana</h2>
-                <p>Queso mozzarella, salsa de tomate especial, Jamón y Piña</p>
-                <p class="price">S/ 23.90</p> <!-- Precio añadido -->
+                <img src="{{ url_for('static', filename='images/combo2.webp') }}" alt="Pizza 1">
+                <h2>Combo Pizza Grande</h2>
+                <p>1 Pizza grande clásica con complemento y gaseosa 1LT</p>
+                <p class="price">S/ 35.90</p> <!-- Precio añadido -->
                 <button>COMPRAR</button>
             </div>
         </section>
