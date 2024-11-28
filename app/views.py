@@ -75,9 +75,11 @@ def mostrar_pizzas():
 
 
 
-@views_blueprint.route('/combos/todos')
-def todos():
-    return render_template('combos/todos.html', filter="5amas")
+@views_blueprint.route('/combos/combos')
+def combos():
+    combos = Promotion.query.filter(Promotion.title.ilike('%Combo%')).all()  # Filtramos las promociones que tienen 'Combo' en el título
+    return render_template('combos/combos.html', combos=combos)
+
 
 @views_blueprint.route('/miPlantilla')
 def layout():
