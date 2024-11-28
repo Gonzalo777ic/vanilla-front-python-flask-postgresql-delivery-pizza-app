@@ -1,6 +1,9 @@
 from flask import Flask, Blueprint, request, jsonify, render_template
-from .models import Category, Promotion, Pizza
-from . import db
+from .models import User, Category, Promotion, Pizza
+from . import db, login_manager
+from flask import flash, redirect, url_for
+from flask_login import login_user, logout_user
+
 
 views_blueprint = Blueprint('views', __name__, template_folder='../templates')
 
@@ -19,6 +22,69 @@ def index():
     print(promotions_data)  # Verifica si los datos están bien organizados
 
     return render_template('index.html', promotions_data=promotions_data)
+
+@views_blueprint.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Obtén los datos del formulario
+        email_or_username = request.form.get('email_or_username')  # Campo único para email o username
+        password = request.form.get('password')
+
+        if not email_or_username or not password:
+            flash('Por favor ingresa tu email o nombre de usuario y la contraseña', 'error')
+            return redirect(url_for('views_blueprint.login'))
+
+        # Buscar al usuario por email o username
+        user = User.query.filter((User.email == email_or_username) | (User.username == email_or_username)).first()
+
+        if user and user.check_password(password):  # Verifica la contraseña
+            login_user(user)  # Inicia sesión
+            return redirect(url_for('index'))  # Redirige a la página principal
+        else:
+            flash('Email, nombre de usuario o contraseña incorrectos', 'error')  # Error si no coincide
+
+    return render_template('auth/login.html')
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@views_blueprint.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # Obtener los valores del formulario
+        username = request.form.get('username')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+        email = request.form.get('email')
+
+        # Validar que las contraseñas coincidan
+        if password != confirm_password:
+            flash("Las contraseñas no coinciden", "error")
+            return redirect('/auth/register')
+
+        # Validar que todos los campos obligatorios estén completos
+        if not (username and password and email):
+            flash("Por favor, complete todos los campos obligatorios", "error")
+            return redirect('/auth/register')
+
+        # Crear el nuevo usuario
+        user = User(username=username, password=password, email=email)
+
+        # Guardar el usuario en la base de datos
+        db.session.add(user)
+        db.session.commit()
+
+        flash("¡Te has registrado exitosamente! Ahora puedes iniciar sesión.", "success")
+        return redirect('/auth/login')
+
+    return render_template('auth/register.html')
+
+@views_blueprint.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 # Crear el blueprint
 promotions_bp = Blueprint('promotions', __name__)

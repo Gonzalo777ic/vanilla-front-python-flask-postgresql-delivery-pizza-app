@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}Pizzas - Pizza Delivery{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+{% include 'navbar.html' %}
+    <main>
+        <div class="container container-login">
+            <section class="login">
+                <h1>INICIAR SESIÓN</h1>
+                <!-- Formulario de inicio de sesión -->
+                <form id="loginForm" method="POST" action="{{ url_for('views.login') }}">
+                    <div class="form-group">
+                        <label for="email_or_username">Correo Electrónico o Nombre de Usuario</label>
+                        <input type="text" id="email_or_username" name="email_or_username" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="******" required>
+                    </div>
+                    <button type="submit" class="login-btn">INICIAR SESIÓN</button>
+                    <div id="error" class="error"></div>
+                </form>
+                <a href="{{ url_for('views.register') }}">Quiero registrarme</a>
+            </section>
+        </div>        
+    </main>
+
+{% include 'footer.html' %}
+{% endblock %}

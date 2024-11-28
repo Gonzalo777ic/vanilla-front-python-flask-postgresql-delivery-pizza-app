@@ -1,11 +1,27 @@
 from datetime import datetime
 from . import db
+from flask_login import UserMixin
+import bcrypt  # Importamos bcrypt
 
-class User(db.Model):
+
+# Tu clase Users, añades la herencia de UserMixin para que Flask-Login pueda manejar el login.
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+
+    # Método para establecer la contraseña de manera segura
+    def set_password(self, password):
+        # Generar un hash con bcrypt
+        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+    # Método para verificar la contraseña
+    def check_password(self, password):
+        # Verificar si la contraseña proporcionada coincide con el hash almacenado
+        return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))
+
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,19 +56,19 @@ class Notification(db.Model):
 
 class ShoppingCart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     pizza_id = db.Column(db.Integer, db.ForeignKey('pizza.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
-    user = db.relationship('User', backref=db.backref('cart_items', lazy=True))
+    users = db.relationship('User', backref=db.backref('cart_items', lazy=True))
     pizza = db.relationship('Pizza', backref=db.backref('cart_items', lazy=True))
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     total_price = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    user = db.relationship('User', backref=db.backref('orders', lazy=True))
+    users = db.relationship('User', backref=db.backref('orders', lazy=True))
     pizzas = db.relationship('Pizza', secondary='order_pizza', backref=db.backref('orders', lazy='dynamic'))
 
 class OrderPizza(db.Model):
@@ -69,27 +85,27 @@ class PaymentMethod(db.Model):
 
 class ShippingAddress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     address_line_1 = db.Column(db.String(255), nullable=False)
     address_line_2 = db.Column(db.String(255), nullable=True)
     city = db.Column(db.String(120), nullable=False)
     postal_code = db.Column(db.String(20), nullable=False)
     country = db.Column(db.String(120), nullable=False)
-    user = db.relationship('User', backref=db.backref('addresses', lazy=True))
+    users = db.relationship('User', backref=db.backref('addresses', lazy=True))
 
 class PurchaseHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
-    user = db.relationship('User', backref=db.backref('purchase_history', lazy=True))
+    users = db.relationship('User', backref=db.backref('purchase_history', lazy=True))
     order = db.relationship('Order', backref=db.backref('purchase_history', lazy=True))
 
 class Recommendation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     pizza_id = db.Column(db.Integer, db.ForeignKey('pizza.id'), nullable=False)
     score = db.Column(db.Float, nullable=False)
-    user = db.relationship('User', backref=db.backref('recommendations', lazy=True))
+    users = db.relationship('User', backref=db.backref('recommendations', lazy=True))
     pizza = db.relationship('Pizza', backref=db.backref('recommendations', lazy=True))
 
 class AppliedPromotion(db.Model):
@@ -101,9 +117,9 @@ class AppliedPromotion(db.Model):
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     pizza_id = db.Column(db.Integer, db.ForeignKey('pizza.id'), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.String(500), nullable=True)
-    user = db.relationship('User', backref=db.backref('reviews', lazy=True))
+    users = db.relationship('User', backref=db.backref('reviews', lazy=True))
     pizza = db.relationship('Pizza', backref=db.backref('reviews', lazy=True))

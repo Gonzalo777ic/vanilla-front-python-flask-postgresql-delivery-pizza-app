@@ -1,0 +1,89 @@
+/* Estilo para el contenedor del formulario de registro */
+.container-register {
+    width: 50%; /* Reduce el ancho a un 60% */
+    max-width: 400px; /* Ancho máximo más pequeño */
+    margin: 144.4px auto; /* Ajuste del margen superior a 150px para bajar la sección */
+    padding: 30px; /* Menos espaciado dentro del marco */
+    background-color: #ffffff; /* Fondo blanco limpio para resaltar el contenido */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más ligera */
+    text-align: center; /* Centrar el texto */
+    border: 1px solid #ddd; /* Borde fino y discreto */
+}
+
+/* Estilo para el título del formulario */
+.container-register h1 {
+    font-size: 2.2em; /* Tamaño de fuente reducido para el título */
+    color: #2c3e50; /* Un color oscuro para hacer el título legible y serio */
+    margin-bottom: 40px; /* Aumento el margen inferior para dar más espacio entre el título y las cajas de texto */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    text-transform: uppercase; /* Mayúsculas para mayor impacto */
+    letter-spacing: 1.5px; /* Espaciado entre letras */
+}
+
+/* Estilo para los campos del formulario */
+.container-register .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.container-register .form-group label {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.container-register .form-group input,
+.container-register .form-group select {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+/* Estilo del botón de registro (naranja) */
+.container-register .register-btn {
+    background-color: #f39c12; /* Naranja */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Espacio agregado entre las cajas de texto y el botón */
+}
+
+/* Efecto al pasar el cursor sobre el botón */
+.container-register .register-btn:hover {
+    background-color: #e67e22;
+}
+
+/* Estilo para los mensajes de error */
+.container-register .error {
+    color: red;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .container-register {
+        width: 80%; /* Aumenta el ancho en pantallas pequeñas */
+        padding: 20px;
+    }
+
+    .container-register h1 {
+        font-size: 2em;
+    }
+
+    .container-register .form-group input {
+        font-size: 1em;
+    }
+
+    .container-register .register-btn {
+        font-size: 1em;
+    }
+}

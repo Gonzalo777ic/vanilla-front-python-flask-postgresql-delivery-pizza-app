@@ -1,8 +1,8 @@
-"""Inicialización de la base de datos y cambios en los modelos
+"""Creación de bd
 
-Revision ID: 718142ac8d04
+Revision ID: b9b16c8e3c22
 Revises: 
-Create Date: 2024-11-27 18:05:47.166314
+Create Date: 2024-11-28 10:37:29.297145
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '718142ac8d04'
+revision = 'b9b16c8e3c22'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,7 +37,7 @@ def upgrade():
     sa.Column('description', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('user',
+    op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=80), nullable=False),
     sa.Column('password', sa.String(length=120), nullable=False),
@@ -52,7 +52,7 @@ def upgrade():
     sa.Column('total_price', sa.Float(), nullable=False),
     sa.Column('status', sa.String(length=50), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('pizza',
@@ -84,7 +84,7 @@ def upgrade():
     sa.Column('city', sa.String(length=120), nullable=False),
     sa.Column('postal_code', sa.String(length=20), nullable=False),
     sa.Column('country', sa.String(length=120), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('applied_promotion',
@@ -110,7 +110,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('order_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['order_id'], ['order.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('recommendation',
@@ -119,7 +119,7 @@ def upgrade():
     sa.Column('pizza_id', sa.Integer(), nullable=False),
     sa.Column('score', sa.Float(), nullable=False),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('review',
@@ -129,7 +129,7 @@ def upgrade():
     sa.Column('rating', sa.Integer(), nullable=False),
     sa.Column('comment', sa.String(length=500), nullable=True),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('shopping_cart',
@@ -138,7 +138,7 @@ def upgrade():
     sa.Column('pizza_id', sa.Integer(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -156,7 +156,7 @@ def downgrade():
     op.drop_table('promotion')
     op.drop_table('pizza')
     op.drop_table('order')
-    op.drop_table('user')
+    op.drop_table('users')
     op.drop_table('payment_method')
     op.drop_table('notification')
     op.drop_table('category')
