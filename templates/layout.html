@@ -6,6 +6,74 @@
     <title>{% block title %}Pizza Delivery{% endblock %}</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <style>
+        /* Estilos del modal */
+        .modal {
+            display: none; /* El modal está oculto por defecto */
+            position: fixed;
+            z-index: 1; /* Asegura que esté encima de todo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+            text-align: center;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .modal-button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .modal-button:hover {
+            background-color: #0056b3;
+        }
+
+        .modal-cancel {
+            background-color: #dc3545;
+        }
+
+        .modal-cancel:hover {
+            background-color: #c82333;
+        }
+
+    </style>
+
+    <script>
+        // Mostrar el modal
+        function showModal(event) {
+            event.preventDefault(); // Prevenir la acción por defecto (no redirigir inmediatamente)
+            document.getElementById("logoutModal").style.display = "block"; // Mostrar el modal
+        }
+
+        // Cerrar el modal
+        function closeModal() {
+            document.getElementById("logoutModal").style.display = "none"; // Ocultar el modal
+        }
+
+        // Confirmar la acción de logout
+        function confirmLogout() {
+            window.location.href = "{{ url_for('views.logout') }}"; // Redirigir a la página de logout
+        }
+    </script>
+
 </head>
 <body>
     <!-- Encabezado con el logo y el menú -->
@@ -24,16 +92,34 @@
             <nav>
                 <a href="{{ url_for('views.index') }}">MENÚ</a>
                 <a href="{{ url_for('views.rastreo') }}">PEDIDO</a>
-                <a href="{{ url_for('views.login') }}">LOGIN</a>
-
-                <a href="">UBICACIÓN</a>
+                {% if current_user.is_authenticated %}
+                    <!-- Si el usuario está autenticado, mostrar su perfil y nombre -->
+                    <a href="{{ url_for('views.profile') }}">Perfil</a>
+                    <a href="{{ url_for('views.profile') }}">{{ current_user.first_name }} {{ current_user.last_name }}</a> <!-- Nombre y apellido del usuario -->
+                    <!-- Cambiar el enlace de cerrar sesión para ejecutar JavaScript -->
+                    <a href="#" onclick="showModal(event)">Cerrar sesión</a>
+                {% else %}
+                    <!-- Si el usuario no está autenticado, mostrar login -->
+                    <a href="{{ url_for('views.login') }}">LOGIN</a>
+                {% endif %}
+                <a href="{{ url_for('views.view_cart') }}">carrito</a>
             </nav>
         </div>
     </header>
+
+    <!-- Modal de Confirmación -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <h3>¿Está seguro que desea cerrar sesión?</h3>
+            <button class="modal-button" onclick="confirmLogout()">Confirmar</button>
+            <button class="modal-button modal-cancel" onclick="closeModal()">Rechazar</button>
+        </div>
+    </div>
+
     <!-- Incluir el navbar justo después del header -->
     <main>
         {% block content %}{% endblock %}
     </main>
+
 </body>
 </html>
-<!--Isique-->

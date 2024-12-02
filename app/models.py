@@ -2,25 +2,38 @@ from datetime import datetime
 from . import db
 from flask_login import UserMixin
 import bcrypt  # Importamos bcrypt
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 # Tu clase Users, añades la herencia de UserMixin para que Flask-Login pueda manejar el login.
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    first_name = db.Column(db.String(120), nullable=False)  # Nombre
+    last_name = db.Column(db.String(120), nullable=False)   # Apellidos
+    document_type = db.Column(db.String(50), nullable=False)  # Tipo de Documento (DNI o Pasaporte)
+    document_number = db.Column(db.String(50), unique=True, nullable=False)  # Número de Documento
+    phone_number = db.Column(db.String(15), nullable=False)  # Número de Teléfono
+    email = db.Column(db.String(120), unique=True, nullable=False)  # Correo Electrónico
+    username = db.Column(db.String(80), unique=True, nullable=False)  # Nombre de usuario generado
+    password = db.Column(db.String(255), nullable=False)  # Contraseña
 
     # Método para establecer la contraseña de manera segura
     def set_password(self, password):
-        # Generar un hash con bcrypt
-        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        self.password = generate_password_hash(password)
 
-    # Método para verificar la contraseña
     def check_password(self, password):
-        # Verificar si la contraseña proporcionada coincide con el hash almacenado
-        return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))
+        return check_password_hash(self.password, password)
+
+    def generate_username(self):
+        base_username = f"{self.first_name.lower()}.{self.last_name.lower()}"
+        base_username = base_username.replace(" ", "")
+        counter = 1
+        while User.query.filter_by(username=base_username).first():
+            base_username = f"{self.first_name.lower()}.{self.last_name.lower()}{counter}"
+            counter += 1
+        self.username = base_username
+
 
 
 class Category(db.Model):
@@ -31,12 +44,12 @@ class Category(db.Model):
 
 class Promotion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), nullable=False)
-    description = db.Column(db.String(500), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    image = db.Column(db.String(255), nullable=False)
-    category_type = db.Column(db.String(50), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    title = db.Column(db.String(120), nullable=False)  # Título de la promoción
+    description = db.Column(db.String(500), nullable=False)  # Descripción de la promoción
+    price = db.Column(db.Float, nullable=False)  # Precio de la promoción
+    image = db.Column(db.String(255), nullable=False)  # Imagen asociada
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)  # Relación con categorías
+
 
 class Pizza(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -64,12 +77,14 @@ class ShoppingCart(db.Model):
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    total_price = db.Column(db.Float, nullable=False)
-    status = db.Column(db.String(50), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Relación con el usuario
+    total_price = db.Column(db.Float, nullable=False)  # Precio total de la orden
+    status = db.Column(db.String(50), nullable=False)  # Estado de la orden (ejemplo: Pagado, Pendiente)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)  # Fecha de creación
+    payment_method_id = db.Column(db.Integer, db.ForeignKey('payment_method.id'), nullable=False)  # Método de pago
     users = db.relationship('User', backref=db.backref('orders', lazy=True))
     pizzas = db.relationship('Pizza', secondary='order_pizza', backref=db.backref('orders', lazy='dynamic'))
+    promotions = db.relationship('Promotion', secondary='order_promotion', backref=db.backref('orders', lazy='dynamic'))  # Relación con promociones
 
 class OrderPizza(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,10 +93,21 @@ class OrderPizza(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
 
+class OrderPromotion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)  # Relación con Order
+    promotion_id = db.Column(db.Integer, db.ForeignKey('promotion.id'), nullable=False)  # Relación con Promotion
+    quantity = db.Column(db.Integer, nullable=False, default=1)  # Cantidad de promociones
+    price = db.Column(db.Float, nullable=False)  # Precio aplicado de la promoción
+    
+
+
 class PaymentMethod(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    description = db.Column(db.String(255), nullable=True)
+    name = db.Column(db.String(120), nullable=False)  # Nombre del método de pago (ej. "Tarjeta", "PayPal")
+    description = db.Column(db.String(255), nullable=True)  # Descripción opcional
+    orders = db.relationship('Order', backref='payment_method', lazy=True)  # Relación con órdenes
+
 
 class ShippingAddress(db.Model):
     id = db.Column(db.Integer, primary_key=True)

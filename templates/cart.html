@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block title %}Carrito de Compras{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+
+<h1>Carrito de Compras</h1>
+
+{% if cart_details %}
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_details %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.subtotal }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('views.remove_from_cart', cart_item_id=item.id) }}">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total: {{ total }}</h3>
+    <button onclick="location.href='/checkout'">Proceder al Pago</button>
+{% else %}
+    <p>Tu carrito está vacío.</p>
+{% endif %}
+
+{% endblock %}

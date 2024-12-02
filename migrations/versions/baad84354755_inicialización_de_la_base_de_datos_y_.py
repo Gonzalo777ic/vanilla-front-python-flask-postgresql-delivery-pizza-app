@@ -1,8 +1,8 @@
 """Inicialización de la base de datos y cambios en los modelos
 
-Revision ID: eae6597307e6
+Revision ID: baad84354755
 Revises: 
-Create Date: 2024-11-27 20:51:19.378250
+Create Date: 2024-12-01 15:05:03.937065
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'eae6597307e6'
+revision = 'baad84354755'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,12 +37,18 @@ def upgrade():
     sa.Column('description', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('user',
+    op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('username', sa.String(length=80), nullable=False),
-    sa.Column('password', sa.String(length=120), nullable=False),
+    sa.Column('first_name', sa.String(length=120), nullable=False),
+    sa.Column('last_name', sa.String(length=120), nullable=False),
+    sa.Column('document_type', sa.String(length=50), nullable=False),
+    sa.Column('document_number', sa.String(length=50), nullable=False),
+    sa.Column('phone_number', sa.String(length=15), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
+    sa.Column('username', sa.String(length=80), nullable=False),
+    sa.Column('password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('document_number'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
@@ -52,7 +58,9 @@ def upgrade():
     sa.Column('total_price', sa.Float(), nullable=False),
     sa.Column('status', sa.String(length=50), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.Column('payment_method_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['payment_method_id'], ['payment_method.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('pizza',
@@ -71,7 +79,6 @@ def upgrade():
     sa.Column('description', sa.String(length=500), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
     sa.Column('image', sa.String(length=255), nullable=False),
-    sa.Column('category_type', sa.String(length=50), nullable=False),
     sa.Column('category_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['category_id'], ['category.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -84,7 +91,7 @@ def upgrade():
     sa.Column('city', sa.String(length=120), nullable=False),
     sa.Column('postal_code', sa.String(length=20), nullable=False),
     sa.Column('country', sa.String(length=120), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('applied_promotion',
@@ -105,12 +112,22 @@ def upgrade():
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('order_promotion',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('order_id', sa.Integer(), nullable=False),
+    sa.Column('promotion_id', sa.Integer(), nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('price', sa.Float(), nullable=False),
+    sa.ForeignKeyConstraint(['order_id'], ['order.id'], ),
+    sa.ForeignKeyConstraint(['promotion_id'], ['promotion.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('purchase_history',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('order_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['order_id'], ['order.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('recommendation',
@@ -119,7 +136,7 @@ def upgrade():
     sa.Column('pizza_id', sa.Integer(), nullable=False),
     sa.Column('score', sa.Float(), nullable=False),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('review',
@@ -129,7 +146,7 @@ def upgrade():
     sa.Column('rating', sa.Integer(), nullable=False),
     sa.Column('comment', sa.String(length=500), nullable=True),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('shopping_cart',
@@ -138,7 +155,7 @@ def upgrade():
     sa.Column('pizza_id', sa.Integer(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -150,13 +167,14 @@ def downgrade():
     op.drop_table('review')
     op.drop_table('recommendation')
     op.drop_table('purchase_history')
+    op.drop_table('order_promotion')
     op.drop_table('order_pizza')
     op.drop_table('applied_promotion')
     op.drop_table('shipping_address')
     op.drop_table('promotion')
     op.drop_table('pizza')
     op.drop_table('order')
-    op.drop_table('user')
+    op.drop_table('users')
     op.drop_table('payment_method')
     op.drop_table('notification')
     op.drop_table('category')

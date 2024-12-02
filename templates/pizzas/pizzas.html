@@ -6,7 +6,6 @@
 
 {% include 'navbar.html' %}
 
-
 <section class="promotions-header">
     <h1>PIZZAS</h1>
     <div class="promotions-filters">
@@ -26,9 +25,16 @@
             <h2>{{ pizza.name }}</h2>
             <p>{{ pizza.description }}</p>
             <p class="price">S/ {{ pizza.price }}</p>
-            <button>COMPRAR</button>
+            
+            <!-- Formulario para agregar pizza al carrito -->
+            <form method="POST" action="{{ url_for('views.add_pizza_to_cart', pizza_id=pizza.id) }}">
+                <input type="number" name="quantity" value="1" min="1" class="quantity-input" required>
+                <button type="submit">COMPRAR</button>
+            </form>
         </div>
     {% endfor %}
 </section>
+
 {% include 'footer.html' %}
+
 {% endblock %}

@@ -3,13 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("search-input");
     const resultsContainer = document.getElementById("results-container");
 
-    // Simulación de datos para búsqueda (esto debería venir del servidor en producción)
-    const promotions = [
-        { id: 1, name: "Combo Familiar", description: "2 pizzas grandes + gaseosa", price: "S/49.90", image: "images/combo2.webp" },
-        { id: 2, name: "Pizza Clásica", description: "Pizza mediana clásica", price: "S/29.90", image: "images/clasicas1.webp" },
-        { id: 3, name: "Combo Personal", description: "1 pizza personal + gaseosa", price: "S/19.90", image: "images/personal.webp" }
-    ];
-
     // Manejar el evento de envío del formulario
     searchForm.addEventListener("submit", (event) => {
         event.preventDefault(); // Evitar recargar la página

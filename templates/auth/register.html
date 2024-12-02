@@ -11,12 +11,12 @@
             <h1>REGÍSTRATE</h1>
             <form id="registerForm" method="POST" action="{{ url_for('views.register') }}">
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Camila" required>
+                    <label for="first_name">Nombre</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Ej. Camila" required>
                 </div>
                 <div class="form-group">
-                    <label for="apellido">Apellidos</label>
-                    <input type="text" id="apellido" name="apellido" placeholder="Ej. Torres" required>
+                    <label for="last_name">Apellidos</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Ej. Torres" required>
                 </div>
                 <div class="form-group">
                     <label for="document_type">Tipo de Documento</label>
@@ -27,12 +27,12 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="dni">Documento (DNI o Pasaporte)</label>
-                    <input type="text" id="dni" name="dni" placeholder="Ej. 123456789" required>
+                    <label for="document_number">Documento (DNI o Pasaporte)</label>
+                    <input type="text" id="document_number" name="document_number" placeholder="Ej. 123456789" required>
                 </div>
                 <div class="form-group">
-                    <label for="telefono">Número de Teléfono</label>
-                    <input type="text" id="telefono" name="telefono" placeholder="Ej. 123456789" required>
+                    <label for="phone_number">Número de Teléfono</label>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="Ej. 123456789" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>

@@ -10,12 +10,13 @@
 <section class="promotions-header">
     <h1>PROMOCIONES</h1>
     <div class="promotions-filters">
-        <button id="verTodoButton" class="filter" data-category="ver_todo">VER TODO</button>
-        <button id="unapersonaButton" class="filter" data-category="unapersona">1 PERSONA</button>
-        <button id="dospersonasButton" class="filter" data-category="dospersonas">2 PERSONAS</button>
-        <button id="cuatropersonasButton" class="filter" data-category="cuatropersonas">3-4 PERSONAS</button>
-        <button id="cincoamasButton" class="filter" data-category="5mas">5 A MÁS</button>
-             
+        <form method="GET" action="{{ url_for('views.promociones') }}">
+            <button type="submit" name="category" value="" class="filter">VER TODO</button>
+            <button type="submit" name="category" value="1" class="filter">1 PERSONA</button>
+            <button type="submit" name="category" value="2" class="filter">2 PERSONAS</button>
+            <button type="submit" name="category" value="3" class="filter">3-4 PERSONAS</button>
+            <button type="submit" name="category" value="4" class="filter">5 A MÁS</button>
+        </form>
     </div>
 </section>
 
@@ -31,47 +32,15 @@
                     <p>{{ promotion.description }}</p>
                     <p class="price">${{ promotion.price }}</p>
                     <p class="category">Categoría: {{ promotion.category_relationship.name }}</p>
-                    <button>COMPRAR</button>
+                    <form method="POST" action="{{ url_for('views.add_promotion_to_cart', promotion_id=promotion.id) }}">
+                        <button type="submit">COMPRAR</button>
+                    </form>
                 </div>
             {% endfor %}
         </div>
     {% endfor %}
 </div>
+
 {% include 'footer.html' %}
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log('Contenido cargado');
-        const filterButtons = document.querySelectorAll('.filter');
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                const filterType = button.getAttribute('data-category'); // Usamos el valor de data-category para filtrar.
-                console.log('Filtro seleccionado: ', filterType);  // Verifica qué filtro se seleccionó.
-        
-                if (filterType === 'ver_todo') {
-                    document.querySelectorAll('.promotion').forEach(promo => {
-                        promo.style.display = 'block';  // Muestra todas las promociones
-                    });
-                } else {
-                    document.querySelectorAll('.promotion').forEach(promo => {
-                        const category = promo.getAttribute('data-category');  // Obtiene la categoría de cada promoción
-                        console.log('Categoría de la promoción:', category);  // Verifica qué categoría se obtiene.
-                        
-                        if (category === filterType) {
-                            promo.style.display = 'block';  // Muestra las promociones de la categoría seleccionada
-                        } else {
-                            promo.style.display = 'none';  // Oculta las promociones que no coinciden
-                        }
-                    });
-                }
-            });
-        });
-    });
-    
-</script>
-
-
 {% endblock %}
-
