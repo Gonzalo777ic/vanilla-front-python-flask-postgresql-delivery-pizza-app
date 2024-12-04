@@ -1,0 +1,48 @@
+/* Estilos para el contenedor principal del libro de reclamaciones */
+.libro {
+    width: 50%; /* Ancho moderado */
+    max-width: 700px; /* Limitar el tamaño máximo */
+    margin: 124px auto 40px auto; /* Centrado en la página */
+    padding: 58px; /* Espaciado interno */
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra sutil */
+    text-align: center; /* Texto centrado */
+    border: 1px solid #ddd; /* Borde fino */
+}
+
+/* Estilo del título principal */
+.libro h1 {
+    font-size: 2.2em; /* Tamaño de fuente para el título */
+    color: #2c3e50; /* Color oscuro para legibilidad */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    text-transform: uppercase; /* Mayúsculas para impacto */
+    letter-spacing: 1.5px; /* Espaciado entre letras */
+}
+
+/* Estilo del párrafo */
+.libro p {
+    font-size: 1.1em; /* Tamaño del texto */
+    color: #7f8c8d; /* Color gris para el texto */
+    line-height: 1.6; /* Espaciado entre líneas */
+    max-width: 650px; /* Ancho máximo del texto */
+    margin: 0 auto 20px auto; /* Centrado y espacio inferior */
+    font-family: 'Arial', sans-serif; /* Fuente clara */
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .libro {
+        width: 80%; /* Más ancho en pantallas pequeñas */
+        padding: 20px; /* Menos padding en pantallas pequeñas */
+    }
+
+    .libro h1 {
+        font-size: 2em; /* Tamaño de título más pequeño en móviles */
+    }
+
+    .libro p {
+        font-size: 1em; /* Reducir el tamaño del texto en móviles */
+    }
+}

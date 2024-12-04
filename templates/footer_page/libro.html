@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}Políticas de Datos Personales{% endblock %}
+
+{% block content %}
+<!-- Incluir el navbar específico para promociones -->
+{% include 'navbar.html' %}
+<title>Libro de Reclamaciones - Pizza Feliz</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styleLibro.css') }}">
+< <main>
+    <div class="container">
+        <div class="libro">
+            <h1 class="title">Libro de Reclamaciones</h1>
+            <div class="content-box">
+                <p class="text">
+                    En Pizza Feliz, valoramos la opinión de nuestros clientes y trabajamos constantemente para mejorar
+                    nuestros servicios. Por ello, ponemos a disposición de todos nuestro Libro de Reclamaciones, una
+                    herramienta oficial para atender y resolver cualquier inquietud o disconformidad sobre nuestros
+                    productos y servicios.
+                </p>
+                <p class="text">
+                    Si tienes algún reclamo que deseas registrar, te invitamos a completarlo en nuestra plataforma
+                    oficial o directamente en cualquiera de nuestras tiendas. Cada caso será evaluado con el mayor
+                    compromiso, asegurándonos de ofrecerte una solución rápida y efectiva.
+                </p>
+                <p class="text">
+                    Gracias por confiar en nosotros. Tu opinión es fundamental para continuar mejorando cada día.
+                </p>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    {% include 'footer.html' %}
+
+    {% endblock %}

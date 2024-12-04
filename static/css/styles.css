@@ -59,7 +59,7 @@ header {
 
 /* Ajustar el contenido principal */
 main {
-    padding-top: 120px; /* Asegura que el contenido no quede oculto debajo del header fijo */
+    padding-top: 80px; /* Asegura que el contenido no quede oculto debajo del header fijo */
 }
 
 
@@ -589,3 +589,107 @@ nav a {
 
 
 
+/* Estilo general para la sección de Checkout */
+.checkout-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-top: 30px;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para los títulos */
+.checkout-container h1,
+.checkout-container h3,
+.checkout-container h4 {
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el formulario */
+.checkout-form {
+    flex: 2;
+}
+
+.checkout-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.checkout-form input,
+.checkout-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f9f9f9; /* Fondo claro */
+}
+
+.checkout-form button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-form button:hover {
+    background-color: #e64a19;
+}
+
+/* Estilos para las direcciones guardadas */
+.saved-addresses {
+    flex: 1;
+    border-left: 1px solid #ccc;
+    padding-left: 20px;
+}
+
+.saved-addresses ul {
+    list-style: none;
+    padding: 0;
+}
+
+.saved-addresses li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.saved-addresses li:hover {
+    background-color: #ff5722;
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el formulario de nueva dirección */
+.new-address-form {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.new-address-form h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}

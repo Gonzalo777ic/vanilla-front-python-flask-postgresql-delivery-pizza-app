@@ -1,8 +1,8 @@
 """Inicialización de la base de datos y cambios en los modelos
 
-Revision ID: baad84354755
+Revision ID: 4241ffd324c5
 Revises: 
-Create Date: 2024-12-01 15:05:03.937065
+Create Date: 2024-12-03 09:15:59.756109
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'baad84354755'
+revision = '4241ffd324c5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -152,9 +152,11 @@ def upgrade():
     op.create_table('shopping_cart',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('pizza_id', sa.Integer(), nullable=False),
+    sa.Column('pizza_id', sa.Integer(), nullable=True),
+    sa.Column('promotion_id', sa.Integer(), nullable=True),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ),
+    sa.ForeignKeyConstraint(['promotion_id'], ['promotion.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

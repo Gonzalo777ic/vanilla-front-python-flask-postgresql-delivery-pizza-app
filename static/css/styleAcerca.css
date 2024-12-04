@@ -1,0 +1,86 @@
+/* Estilos para el marco y centrado de la sección Acerca */
+.acerca {
+    width: 60%; /* Ancho del 60% para que el formulario y el texto sean más anchos */
+    max-width: 780px; /* Mayor ancho máximo para el contenedor */
+    margin: 124px auto 40px auto; /* Márgenes adecuados */
+    padding: 20px; /* Espaciado dentro del marco */
+    background-color: #ffffff; /* Fondo blanco para resaltar el contenido */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra ligera */
+    text-align: center; /* Centrado de texto */
+    border: 1px solid #ddd; /* Borde fino y discreto */
+}
+
+/* Estilo del título principal */
+.acerca h1 {
+    font-size: 2.2em; /* Tamaño de fuente adecuado para el título */
+    color: #2c3e50; /* Color oscuro para el título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    text-transform: uppercase; /* Mayúsculas para mayor impacto */
+    letter-spacing: 1.5px; /* Espaciado entre letras */
+}
+
+/* Estilo de los párrafos */
+.acerca p {
+    font-size: 1.1em; /* Tamaño de texto ligeramente reducido */
+    color: #7f8c8d; /* Color gris para el texto */
+    line-height: 1.6; /* Espaciado entre líneas ajustado */
+    max-width: 750px; /* Aumentar el ancho máximo del párrafo */
+    margin: 0 auto 20px auto; /* Centrado y margen inferior */
+    font-family: 'Arial', sans-serif; /* Fuente clara y legible */
+}
+
+/* Estilos para el formulario (más ancho) */
+.acerca form {
+    width: 80%; /* Aumentar el ancho del formulario */
+    margin: 0 auto; /* Centrado automático */
+}
+
+.acerca form input[type="text"],
+.acerca form input[type="email"],
+.acerca form textarea {
+    width: 100%; /* Que los campos del formulario ocupen el 100% del ancho */
+    padding: 12px; /* Más espacio dentro de los campos */
+    margin-bottom: 20px; /* Espacio entre los campos */
+    border: 1px solid #ddd; /* Borde fino */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de texto cómodo */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho */
+}
+
+/* Estilo del botón del formulario */
+.acerca form button {
+    width: 100%; /* Botón ocupa todo el ancho del formulario */
+    padding: 12px; /* Espacio dentro del botón */
+    background-color: #3498db; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1.2em; /* Tamaño de texto */
+    cursor: pointer; /* Cambia el cursor a puntero */
+}
+
+.acerca form button:hover {
+    background-color: #2980b9; /* Cambia el color al pasar el mouse */
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .acerca {
+        width: 80%; /* Más ancho en pantallas pequeñas */
+        padding: 20px; /* Menos padding en pantallas pequeñas */
+    }
+
+    .acerca h1 {
+        font-size: 2em; /* Tamaño de título más pequeño en móviles */
+    }
+
+    .acerca p {
+        font-size: 1em; /* Reducir el tamaño del texto en móviles */
+    }
+
+    .acerca form {
+        width: 100%; /* Asegurar que el formulario ocupe todo el ancho en móviles */
+    }
+}

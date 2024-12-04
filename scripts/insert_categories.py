@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import Promotion, Category
+from app.models import Category
 
 # Crear la aplicación para acceder a la base de datos
 app = create_app()

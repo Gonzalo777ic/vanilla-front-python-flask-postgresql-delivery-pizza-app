@@ -10,7 +10,7 @@
 <section class="promotions-header">
     <h1>PROMOCIONES</h1>
     <div class="promotions-filters">
-        <form method="GET" action="{{ url_for('views.promociones') }}">
+        <form method="GET" action="{{ url_for('views.mostrar_promociones') }}">
             <button type="submit" name="category" value="" class="filter">VER TODO</button>
             <button type="submit" name="category" value="1" class="filter">1 PERSONA</button>
             <button type="submit" name="category" value="2" class="filter">2 PERSONAS</button>
@@ -21,25 +21,22 @@
 </section>
 
 <!-- Mostrar promociones con sus categorías -->
-<div class="promotions-container">
-    {% for category, promotions in promotions_data.items() %}
-        <h2>{{ category }}</h2>
-        <div class="category-promotions">
-            {% for promotion in promotions %}
-                <div class="promotion" data-category="{{ promotion.category_relationship.name|lower }}">
-                    <img src="{{ url_for('static', filename=promotion.image) }}" alt="{{ promotion.title }}">
-                    <h3>{{ promotion.title }}</h3>
-                    <p>{{ promotion.description }}</p>
-                    <p class="price">${{ promotion.price }}</p>
-                    <p class="category">Categoría: {{ promotion.category_relationship.name }}</p>
-                    <form method="POST" action="{{ url_for('views.add_promotion_to_cart', promotion_id=promotion.id) }}">
-                        <button type="submit">COMPRAR</button>
-                    </form>
-                </div>
-            {% endfor %}
-        </div>
+<section class="promotions">
+    {% for promotion in promociones %}
+    <div class="promotion" data-category="{{ promotion.category_id }}">
+        <img src="{{ url_for('static', filename=promotion.image) }}" alt="{{ promotion.title }}">
+        <h2>{{ promotion.title }}</h2>
+        <p>{{ promotion.description }}</p>
+        <p class="price">S/ {{ promotion.price }}</p>
+
+        <!-- Formulario para agregar promoción al carrito -->
+        <form method="POST" action="{{ url_for('views.add_promotion_to_cart', promotion_id=promotion.id) }}">
+            <input type="number" name="quantity" value="1" min="1" class="quantity-input" required>
+            <button type="submit">COMPRAR</button>
+        </form>
+    </div>
     {% endfor %}
-</div>
+</section>
 
 {% include 'footer.html' %}
 

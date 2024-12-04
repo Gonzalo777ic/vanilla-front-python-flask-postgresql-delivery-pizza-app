@@ -39,8 +39,6 @@ class User(UserMixin, db.Model):
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
-    # Relación con promociones (uno a muchos)
-    promotions = db.relationship('Promotion', backref='category_relationship', lazy=True)
 
 class Promotion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,6 +47,9 @@ class Promotion(db.Model):
     price = db.Column(db.Float, nullable=False)  # Precio de la promoción
     image = db.Column(db.String(255), nullable=False)  # Imagen asociada
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)  # Relación con categorías
+
+    # Relación con Category
+    category = db.relationship('Category', backref=db.backref('promotions', lazy=True))
 
 
 class Pizza(db.Model):
@@ -70,10 +71,12 @@ class Notification(db.Model):
 class ShoppingCart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    pizza_id = db.Column(db.Integer, db.ForeignKey('pizza.id'), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False, default=1)
+    pizza_id = db.Column(db.Integer, db.ForeignKey('pizza.id'), nullable=True)  # Pizza puede ser nula si es una promoción
+    promotion_id = db.Column(db.Integer, db.ForeignKey('promotion.id'), nullable=True)  # Relación con promociones
+    quantity = db.Column(db.Integer, nullable=False, default=1)  # Cantidad de pizza o promoción en el carrito
     users = db.relationship('User', backref=db.backref('cart_items', lazy=True))
-    pizza = db.relationship('Pizza', backref=db.backref('cart_items', lazy=True))
+    pizza = db.relationship('Pizza', backref=db.backref('cart_items', lazy=True), uselist=False)
+    promotion = db.relationship('Promotion', backref=db.backref('cart_items', lazy=True), uselist=False)  # Relación con promoción
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -100,8 +103,6 @@ class OrderPromotion(db.Model):
     quantity = db.Column(db.Integer, nullable=False, default=1)  # Cantidad de promociones
     price = db.Column(db.Float, nullable=False)  # Precio aplicado de la promoción
     
-
-
 class PaymentMethod(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)  # Nombre del método de pago (ej. "Tarjeta", "PayPal")

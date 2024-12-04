@@ -1,0 +1,155 @@
+/* Contenedor principal */
+.container-terminos {
+    margin: 20px auto;
+    width: 90%;
+    margin-bottom: 407px; /* Espacio adicional entre los términos y el footer */
+}
+
+/* Contenedor de las dos columnas */
+.columns {
+    display: flex;
+    gap: 30px;
+}
+
+/* Columna izquierda (menú de ayuda) */
+.sidebar {
+    width: 30%;
+    padding: 20px;
+    background-color: transparent;
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.sidebar-list {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-list li {
+    margin-bottom: 10px;
+}
+
+.sidebar-list a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.sidebar-list a:hover {
+    text-decoration: underline;
+    color: #2c3e50;
+}
+
+/* Columna derecha (contenido de términos y condiciones) */
+.terminos {
+    width: 70%;
+    padding: 20px;
+    text-align: left;
+}
+
+.terminos h1,
+.terminos h2 {
+    color: #2c3e50;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 15px;
+}
+
+.terminos p {
+    font-size: 1.1em;
+    color: #7f8c8d;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.terminos .subtitle {
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Estilos para el título y el contenido */
+.terminos h1 {
+    cursor: pointer;
+    color: #2c3e50;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+    padding: 10px;
+    border: 2px solid #2c3e50;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminos h1:hover {
+    color: #3498db;
+}
+
+.terminos h1.open .arrow {
+    transform: rotate(180deg);
+}
+
+.content-box {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: max-height 0.5s ease-out;
+    margin-bottom: 20px;
+}
+
+.content-box.show {
+    max-height: 1000px;
+    padding: 20px;
+}
+
+.content-box p {
+    overflow-y: auto;
+    max-height: 200px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #7f8c8d;
+    line-height: 1.8;
+}
+
+/* Flecha de animación */
+.p8Jhnd {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.aj35ze {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    transform-origin: center center;
+    transform: scale3d(1, -1, 1);
+    transition: transform 0.3s ease;
+}
+
+.terminos h1.open .aj35ze {
+    transform: scale3d(1, 1, 1);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .columns {
+        flex-direction: column;
+    }
+
+    .sidebar,
+    .terminos {
+        width: 100%;
+    }
+}

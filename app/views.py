@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, request, jsonify, render_template
-from .models import User, Category, Promotion, Pizza, ShoppingCart
+from .models import User, Category, Promotion, Pizza, ShoppingCart, Order, ShoppingCart, OrderPizza, OrderPromotion, PaymentMethod, ShippingAddress, PurchaseHistory, Notification
 from . import db, login_manager
 from flask import flash, redirect, url_for
 from flask_login import login_user, logout_user
@@ -13,16 +13,31 @@ views_blueprint = Blueprint('views', __name__, template_folder='../templates')
 @views_blueprint.route('/')
 @views_blueprint.route('/index')
 def index():
-    categories = Category.query.all()
+    category = request.args.get('category')  # Obtener la categoría desde los parámetros de la URL
+
+    if category:
+        # Filtrar por categoría tanto pizzas como promociones
+        pizzas = Pizza.query.filter_by(category_id=category).all()
+        promociones = Promotion.query.filter_by(category_id=category).all()
+    else:
+        # Mostrar todas las pizzas y promociones si no hay filtro
+        pizzas = Pizza.query.all()
+        promociones = Promotion.query.all()
+
+    categories = Category.query.all()  # Si necesitas las categorías
     promotions_data = {}
 
     for category in categories:
         promotions = Promotion.query.filter(Promotion.category_id == category.id).all()
         promotions_data[category.name] = promotions
 
-    print(promotions_data)  # Verifica si los datos están bien organizados
-
-    return render_template('index.html', promotions_data=promotions_data)
+    # Renderizar el template pasando ambas listas
+    return render_template(
+        'index.html',
+        pizzas=pizzas,
+        promociones=promociones,
+        promotions_data=promotions_data
+    )
 
 @views_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -106,7 +121,7 @@ def register():
         db.session.commit()
 
         # Webhook: notificar registro exitoso
-        webhook_url = "https://webhook-test.com/18c89d7118757a929fd629ed576a9e56"  # Cambiar a la URL del webhook real
+        webhook_url = "https://webhook-test.com/1c8b8262c234f641a7490c73b17b10cf"  # Cambiar a la URL del webhook real
         payload = {
             "event": "user_registered",
             "data": {
@@ -175,18 +190,7 @@ def promotions():
     
     return render_template('promotions.html', promotions=promotions)
 
-@views_blueprint.route('/promociones/promociones')
-def promociones():
-    categories = Category.query.all()
-    promotions_data = {}
 
-    for category in categories:
-        promotions = Promotion.query.filter(Promotion.category_id == category.id).all()
-        promotions_data[category.name] = promotions
-
-    print(promotions_data)  # Verifica si los datos están bien organizados
-
-    return render_template('promociones/promociones.html', promotions_data=promotions_data)
 
 from flask import render_template, request
 from .models import Promotion, Pizza
@@ -233,6 +237,9 @@ def search():
     return render_template('search.html', query=query, resultados=resultados)
 
 
+
+
+
 @views_blueprint.route('/pizzas/pizzas', methods=['GET'])
 def mostrar_pizzas():
     category = request.args.get('category')  # Obtiene la categoría de la URL
@@ -241,6 +248,26 @@ def mostrar_pizzas():
     else:
         pizzas = Pizza.query.all()  # Muestra todas si no hay filtro
     return render_template('pizzas/pizzas.html', pizzas=pizzas)
+
+@views_blueprint.route('/promociones/promociones', methods=['GET'])
+def mostrar_promociones():
+    category = request.args.get('category')  # Obtiene la categoría de la URL
+    if category:
+        # Filtra las promociones por categoría
+        promociones = Promotion.query.filter_by(category_id=category).all()  # Filtrar categorías
+    else:
+        # Si no hay filtro, obtenemos todas las categorías
+        promociones = Promotion.query.all()
+    return render_template('promociones/promociones.html', promociones=promociones)
+
+@views_blueprint.route('/combos', methods=['GET'])
+def mostrar_combos():
+    category = request.args.get('category')  # Obtén la categoría desde los parámetros de la URL
+    if category:
+        combos = Promotion.query.filter_by(category_id=category).filter(Promotion.title.ilike('%combo%')).all()
+    else:
+        combos = Promotion.query.filter(Promotion.title.ilike('%combo%')).all()  # Mostrar solo promociones con "combo"
+    return render_template('combos/combos.html', combos=combos)
 
 
 
@@ -260,23 +287,7 @@ def navbar():
     """Página principal para visualizar promociones y la ubicación del repartidor"""
     return render_template('navbar.html')
 
-@views_blueprint.route('/pizzas/clasicas')
-def clasicas():
-    return render_template('pizzas/clasicas.html', filter="5amas")
 
-@views_blueprint.route('/pizzas/especialidades')
-def especialidades():
-    return render_template('pizzas/especialidades.html', filter="5amas")
-
-@views_blueprint.route('/contactanos')
-def contactanos():
-    """Página para contacto"""
-    return render_template('contactanos.html')
-
-@views_blueprint.route('/rastreo')
-def rastreo():
-    """Página para el repartidor que envía la ubicación en tiempo real"""
-    return render_template('rastreo.html')
 
 # Carrito
 @views_blueprint.route('/add_to_cart/pizza/<int:pizza_id>', methods=['POST'])
@@ -305,13 +316,22 @@ def add_promotion_to_cart(promotion_id):
     if not current_user.is_authenticated:
         flash("Por favor, inicia sesión para agregar productos al carrito.", "error")
         return redirect('/login')
+    quantity = request.form.get('quantity', 1)
 
+    # Verificar si la pizza ya existe en el carrito
+    existing_item = ShoppingCart.query.filter_by(user_id=current_user.id, promotion_id=promotion_id).first()
+    if existing_item:
+        existing_item.quantity += int(quantity)
+    else:
+        new_item = ShoppingCart(user_id=current_user.id, promotion_id=promotion_id, quantity=int(quantity))
+        db.session.add(new_item)
+
+    db.session.commit()
     # Aquí debes agregar la lógica para agregar una promoción al carrito
     # Por ejemplo, podrías almacenar la promoción en una tabla similar a la de las pizzas en el carrito
 
     flash("Promoción agregada al carrito.", "success")
-    return redirect(url_for('views.promociones'))  # Redirigir a la vista de promociones
-
+    return redirect(url_for('views.mostrar_promociones'))  # Redirigir a la vista de promociones
 
 @views_blueprint.route('/cart')
 def view_cart():
@@ -323,14 +343,37 @@ def view_cart():
 
     cart_details = []
     for item in cart_items:
-        pizza = Pizza.query.get(item.pizza_id)
-        cart_details.append({
-            'id': item.id,
-            'name': pizza.name,
-            'price': pizza.price,
-            'quantity': item.quantity,
-            'subtotal': pizza.price * item.quantity
-        })
+        # Verificar si es una pizza o una promoción
+        pizza = Pizza.query.get(item.pizza_id)  # Obtener pizza
+        promotion = Promotion.query.get(item.promotion_id)  # Obtener promoción
+
+        if pizza:
+            # Si el item es una pizza
+            cart_details.append({
+                'id': item.id,
+                'name': pizza.name,
+                'price': pizza.price,
+                'quantity': item.quantity,
+                'subtotal': pizza.price * item.quantity
+            })
+        elif promotion:
+            # Si el item es una promoción
+            cart_details.append({
+                'id': item.id,
+                'name': promotion.title,  # Usamos el título de la promoción
+                'price': promotion.price,
+                'quantity': item.quantity,
+                'subtotal': promotion.price * item.quantity
+            })
+        else:
+            # Si el item no es una pizza ni una promoción (error o invalid)
+            cart_details.append({
+                'id': item.id,
+                'name': 'Producto no disponible',
+                'price': 0,
+                'quantity': item.quantity,
+                'subtotal': 0
+            })
 
     total = sum([item['subtotal'] for item in cart_details])
 
@@ -353,23 +396,140 @@ def remove_from_cart(cart_item_id):
     return redirect('/cart')
 
 
+@views_blueprint.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if not current_user.is_authenticated:
+        # Redirigir a la página de login si no está autenticado
+        return redirect(url_for('auth.login'))
 
+    # Obtener las direcciones de envío del usuario
+    shipping_addresses = ShippingAddress.query.filter_by(user_id=current_user.id).all()
+
+    return render_template('checkout.html', user=current_user, shipping_addresses=shipping_addresses)
+
+
+from flask import redirect, url_for
+
+
+from flask_login import current_user, login_required
+
+@views_blueprint.route('/buy', methods=['POST'])
+@login_required
+def buy():
+    user = current_user
+    payment_method_name = request.form.get('payment_method') 
+    payment_method = PaymentMethod.query.filter_by(id=payment_method_name).first()
+    print(payment_method)
+
+    # Obtener el carrito del usuario
+    cart_items = ShoppingCart.query.filter_by(user_id=user.id).all()
+
+    # Calcular el precio total del carrito, considerando tanto pizzas como promociones
+    total_price = 0
+    for item in cart_items:
+        # Verificar si el item es una pizza o una promoción
+        pizza = Pizza.query.get(item.pizza_id)  # Obtener pizza
+        promotion = Promotion.query.get(item.promotion_id)  # Obtener promoción
+
+        if pizza:
+            # Si el item es una pizza
+            total_price += pizza.price * item.quantity
+        elif promotion:
+            # Si el item es una promoción
+            total_price += promotion.price * item.quantity
+        else:
+            # Si el item no es ni una pizza ni una promoción, esto podría ser un error
+            flash("Producto no disponible", "error")
+            return redirect(url_for('views.cart'))
+
+    # Crear la nueva orden
+    new_order = Order(
+        user_id=user.id,
+        total_price=total_price,
+        status='Pendiente',  # Puedes ajustar el estado según el proceso de pago
+        payment_method_id=payment_method.id
+    )
+    db.session.add(new_order)
+    db.session.commit()  # Guardar la orden
+
+    # Transferir los productos del carrito a la orden
+    for item in cart_items:
+        pizza = Pizza.query.get(item.pizza_id)
+        promotion = Promotion.query.get(item.promotion_id)
+
+        if pizza:
+            order_pizza = OrderPizza(order_id=new_order.id, pizza_id=item.pizza.id, quantity=item.quantity, price=pizza.price)
+            db.session.add(order_pizza)
+        elif promotion:
+            order_promotion = OrderPromotion(order_id=new_order.id, promotion_id=item.promotion_id, quantity=item.quantity, price=promotion.price)
+            db.session.add(order_promotion)
+
+    # Obtener el ID de la dirección de envío seleccionada
+    shipping_address_id = request.form.get('shipping_address')
+
+    if shipping_address_id:
+        new_order.shipping_address_id = shipping_address_id  # Asociar la dirección seleccionada
+    else:
+        # Crear una nueva dirección si no se seleccionó una
+        new_address_line_1 = request.form.get('new_address_line_1')
+        new_city = request.form.get('new_city')
+        new_postal_code = request.form.get('new_postal_code')
+        new_country = request.form.get('new_country')
+
+        new_address = ShippingAddress(
+            user_id=user.id,
+            address_line_1=new_address_line_1,
+            city=new_city,
+            postal_code=new_postal_code,
+            country=new_country
+        )
+        db.session.add(new_address)
+        db.session.commit()  # Guardar la dirección
+
+        new_order.shipping_address_id = new_address.id  # Asociar la nueva dirección a la orden
+
+    db.session.commit()  # Guardar la relación con la dirección de envío
+
+    # Guardar el historial de compras
+    purchase_history = PurchaseHistory(user_id=user.id, order_id=new_order.id)
+    db.session.add(purchase_history)
+    db.session.commit()
+
+    # Webhook: notificar compra exitosa
+    webhook_url = "https://webhook-test.com/1c8b8262c234f641a7490c73b17b10cf"  # Cambiar a la URL del webhook real
+    payload = {
+        "event": "purchase_completed",
+        "data": {
+            "order_id": new_order.id,
+            "user_id": user.id,
+            "total_price": total_price,
+            "payment_method": payment_method.name,
+            "status": new_order.status,
+            "shipping_address": {
+                "line_1": new_address.address_line_1,
+                "city": new_address.city,
+                "postal_code": new_address.postal_code,
+                "country": new_address.country
+            }
+        }
+    }
+    
+    try:
+        response = requests.post(webhook_url, json=payload)
+        if response.status_code == 200:
+            print("Webhook enviado exitosamente.")
+        else:
+            print(f"Error al enviar webhook: {response.status_code}, {response.text}")
+    except Exception as e:
+        print(f"Error al enviar el webhook: {e}")
+
+    # Redirigir a una página de confirmación
+    flash("¡Compra realizada exitosamente!", "success")
+    return redirect(url_for('views.index', order_id=new_order.id))
 
 # Rutas para la ubicación del repartidor
 ubicacion_repartidor = {"lat": None, "lon": None}
 
-@views_blueprint.route('/actualizar_ubicacion', methods=['POST'])
-def actualizar_ubicacion():
-    """Recibe la ubicación actual del repartidor desde el móvil"""
-    data = request.get_json()
-    lat = data.get("lat")
-    lon = data.get("lon")
-
-    # Actualiza la ubicación en la memoria
-    ubicacion_repartidor["lat"] = lat
-    ubicacion_repartidor["lon"] = lon
-
-    return jsonify({"mensaje": "Ubicación actualizada correctamente"}), 200
 
 @views_blueprint.route('/obtener_ubicacion', methods=['GET'])
 def obtener_ubicacion():
@@ -380,3 +540,39 @@ def obtener_ubicacion():
         return jsonify({"mensaje": "Ubicación no disponible"}), 404
 
 
+# Url de Footer
+@views_blueprint.route('/acerca')
+def acerca():
+    return render_template('footer_page/acerca.html')  # Ruta correcta a acerca.html
+
+@views_blueprint.route('/mision')
+def mision():
+    return render_template('footer_page/mision.html')  # Ruta correcta a mision.html
+
+@views_blueprint.route('/vision')
+def vision():
+    return render_template('footer_page/vision.html')  # Ruta correcta a vision.html
+
+@views_blueprint.route('/terminos')
+def terminos():
+    return render_template('footer_page/terminos.html')  # Ruta correcta a terminos.html
+
+@views_blueprint.route('/contactanos')
+def contactanos():
+    return render_template('footer_page/contactanos.html')  # Ruta correcta a contactanos.html
+
+@views_blueprint.route('/politicas')
+def politicas():
+    return render_template('footer_page/politicas.html')  # Ruta correcta a politicas.html
+
+@views_blueprint.route('/libro')
+def libro():
+    return render_template('footer_page/libro.html')  # Ruta correcta a libro.html
+
+
+
+
+@views_blueprint.route('/rastreo')
+def rastreo():
+    """Página para el repartidor que envía la ubicación en tiempo real"""
+    return render_template('rastreo.html')

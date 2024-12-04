@@ -16,7 +16,7 @@ login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__,static_folder='../static', template_folder='../templates')  # Asegúrate de poner la ruta correcta
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:contrasña@ip:contraseñadepostgre/nombrebasededatos'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:pingo123@192.168.181.186:5432/aes_project'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     app.secret_key = 'your-secret-key'  # Necesario para las sesiones

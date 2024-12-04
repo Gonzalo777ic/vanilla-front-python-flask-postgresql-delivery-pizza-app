@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block title %}Contáctanos{% endblock %}
+
+{% block content %}
+<!-- Incluir el navbar específico para promociones -->
+{% include 'navbar.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styleContactanos.css') }}">
+
+<main>
+    <div class="container-contactanos">
+        <div class="columns">
+            <!-- Columna izquierda: menú de ayuda -->
+            <div class="sidebar">
+                <h2>Ayuda</h2>
+                <ul class="sidebar-list">
+                    <li><a href="{{ url_for('views.politicas') }}" class="text-white">Políticas de Datos Personales</a>
+                    </li>
+                    <li><a href="{{ url_for('views.terminos') }}" class="text-white">Términos y Condiciones de
+                            Promociones</a></li>
+                    <li><a href="{{ url_for('views.contactanos') }}" class="text-white">Contáctanos</a></li>
+                </ul>
+            </div>
+            <!-- Columna derecha: contenido de contacto -->
+            <div class="contactanos">
+                <h1 onclick="toggleContent(this)">
+                    CONTÁCTANOS
+                    <div class="arrow">&#x2193;</div> <!-- Flecha hacia abajo -->
+                </h1>
+                <div class="content-box" id="content-box">
+                    <h2 class="subtitle">¿Cómo podemos ayudarte?</h2>
+                    <p class="text">
+                        En Pizza Feliz, estamos aquí para resolver cualquier duda o inconveniente que puedas tener. A
+                        continuación, te proporcionamos los detalles para contactarnos.
+                    </p>
+                    <h2 class="subtitle">Atención al Cliente</h2>
+                    <p class="text">
+                        Si tienes preguntas sobre nuestros productos, promociones o cualquier otro tema relacionado con
+                        Pizza Feliz, no dudes en contactarnos.
+                    </p>
+                    <p class="text">
+                        Teléfono: +123 456 7890
+                    </p>
+                    <p class="text">
+                        Correo electrónico: contacto@pizzafeliz.com
+                    </p>
+                    <h2 class="subtitle">Redes Sociales</h2>
+                    <p class="text">
+                        También puedes encontrarnos en nuestras redes sociales:
+                    </p>
+                    <ul class="text">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    function toggleContent() {
+        var contentBox = document.querySelector('.content-box');
+        var arrow = document.querySelector('.arrow');
+
+        // Alternar la visibilidad del contenido
+        contentBox.classList.toggle('show');
+
+        // Cambiar la dirección de la flecha
+        document.querySelector('h1').classList.toggle('open');
+
+        // Hacer un scroll suave hacia el contenido
+        contentBox.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+</body>
+
+</html>
+{% include 'footer.html' %}
+
+{% endblock %}

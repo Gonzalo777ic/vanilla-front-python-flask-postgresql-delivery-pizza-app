@@ -1,0 +1,48 @@
+/* Estilos para el marco y centrado de la visión */
+.vision {
+    width: 50%; /* Reduce el ancho a un 60% */
+    max-width: 700px; /* Ancho máximo más pequeño */
+    margin: 124px auto 40px auto; /* Reducir el margen inferior */
+    padding: 30px; /* Menos espaciado dentro del marco */
+    background-color: #ffffff; /* Fondo blanco limpio para resaltar el contenido */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más ligera */
+    text-align: center; /* Centrar el texto */
+    border: 1px solid #ddd; /* Borde fino y discreto */
+}
+
+/* Estilo del título principal */
+.vision h1 {
+    font-size: 2.2em; /* Tamaño de fuente reducido para el título */
+    color: #2c3e50; /* Un color oscuro para hacer el título legible y serio */
+    margin-bottom: 20px; /* Menos espacio debajo del título */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    text-transform: uppercase; /* Mayúsculas para mayor impacto */
+    letter-spacing: 1.5px; /* Espaciado entre letras */
+}
+
+/* Estilo del párrafo */
+.vision p {
+    font-size: 1.1em; /* Reducir ligeramente el tamaño del texto */
+    color: #7f8c8d; /* Color gris para el texto */
+    line-height: 1.6; /* Espaciado entre líneas ajustado */
+    max-width: 650px; /* Reducir el ancho máximo del párrafo */
+    margin: 0 auto 20px auto; /* Centrar el párrafo y dar espacio inferior */
+    font-family: 'Arial', sans-serif; /* Fuente clara */
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .vision {
+        width: 80%; /* Más ancho en pantallas pequeñas */
+        padding: 20px; /* Menos padding en pantallas pequeñas */
+    }
+
+    .vision h1 {
+        font-size: 2em; /* Tamaño de título más pequeño en móviles */
+    }
+
+    .vision p {
+        font-size: 1em; /* Reducir el tamaño del texto en móviles */
+    }
+}

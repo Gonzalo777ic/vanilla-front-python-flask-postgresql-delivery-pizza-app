@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %}Visión de Pizza Feliz{% endblock %}
+
+{% block content %}
+<!-- Incluir el navbar específico para promociones -->
+
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleVision.css') }}">
+    <main>
+        <div class="container">
+            <div class="vision">
+                <h1 class="title">Nuestra Visión</h1>
+                <div class="content-box">
+                    <p class="text">
+                        En Pizza Feliz, nuestra visión es ser reconocidos como líderes en el sector de la comida rápida a nivel nacional, brindando productos de la más alta calidad y un servicio al cliente excepcional. Queremos ofrecer a nuestros clientes una experiencia gastronómica única, que combine sabor, frescura y la satisfacción de saber que cada producto que ofrecemos está hecho con los mejores ingredientes.
+                    </p>
+                    <p class="text">
+                        Aspiramos a ser una marca confiable, innovadora y cercana a nuestra comunidad. Nuestro compromiso es expandir nuestra presencia, manteniendo nuestros estándares de calidad y mejorando continuamente nuestra oferta para superar las expectativas de nuestros consumidores.
+                    </p>
+                    <p class="text">
+                        De este modo, Pizza Feliz continuará creciendo, ofreciendo opciones deliciosas para todos los gustos y asegurando que cada visita sea una experiencia memorable para nuestros clientes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+{% include 'footer.html' %}
+
+{% endblock %}

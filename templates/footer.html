@@ -1,12 +1,44 @@
-<footer class="bg-dark text-light py-4"> 
-    <div class="container text-center">
-        <p>
-            Contacto: 
-            <a href="mailto:info@tusistema.com" class="text-white text-decoration-none">
-                info@tusistema.com
-            </a> 
-            | Teléfono: +51 123 456 789
-        </p>
-        <p class="mb-0">&copy; 2024 PIZZA. Todos los derechos reservados.</p>
+<footer class="footer bg-dark text-light py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Conócenos</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ url_for('views.acerca') }}" class="text-white">Acerca de Pizza Feliz</a></li>
+                    <li><a href="{{ url_for('views.mision') }}" class="text-white">Nuestra Misión</a></li>
+                    <li><a href="{{ url_for('views.vision') }}" class="text-white">Nuestra Visión</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Nuestros Productos</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ url_for('views.index') }}" class="text-white">Promociones</a></li>
+                    <li><a href="{{ url_for('views.mostrar_pizzas') }}" class="text-white">Pizzas</a></li>
+                    <li><a href="{{ url_for('views.combos') }}" class="text-white">Combos</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Ayuda</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ url_for('views.politicas') }}" class="text-white">Políticas de Datos Personales</a>
+                    </li>
+                    <li><a href="{{ url_for('views.terminos') }}" class="text-white">Términos y Condiciones de
+                            Promociones</a></li>
+                    <li><a href="{{ url_for('views.contactanos') }}" class="text-white">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ url_for('views.libro') }}" class="text-white">
+                    <img src="{{ url_for('static', filename='images/libro.png') }}" alt="Libro"
+                        class="footer-book-image" width="50">
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <p class="mb-0">&copy; 2024 PIZZA FELIZ. Todos los derechos reservados.</p>
+        </div>
+        <div class="text-center mt-3" style="font-size: 55px; font-weight: bold;">
+            ISIQUE PRODUCTIONS
+        </div>
     </div>
 </footer>

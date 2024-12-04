@@ -1,0 +1,88 @@
+/* Estilo para el contenedor del formulario de login */
+.container-login {
+    width: 50%; /* Reduce el ancho a un 60% */
+    max-width: 400px; /* Ancho máximo más pequeño */
+    margin: 144.4px auto; /* Ajuste del margen superior a 150px para bajar la sección */
+    padding: 30px; /* Menos espaciado dentro del marco */
+    background-color: #ffffff; /* Fondo blanco limpio para resaltar el contenido */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más ligera */
+    text-align: center; /* Centrar el texto */
+    border: 1px solid #ddd; /* Borde fino y discreto */
+}
+
+/* Estilo para el título del formulario */
+.container-login h1 {
+    font-size: 2.2em; /* Tamaño de fuente reducido para el título */
+    color: #2c3e50; /* Un color oscuro para hacer el título legible y serio */
+    margin-bottom: 40px; /* Aumento el margen inferior para dar más espacio entre el título y las cajas de texto */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    text-transform: uppercase; /* Mayúsculas para mayor impacto */
+    letter-spacing: 1.5px; /* Espaciado entre letras */
+}
+
+/* Estilo para los campos del formulario */
+.container-login .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.container-login .form-group label {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.container-login .form-group input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+/* Estilo del botón de login (naranja) */
+.container-login .login-btn {
+    background-color: #f39c12; /* Naranja */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Espacio agregado entre las cajas de texto y el botón */
+}
+
+/* Efecto al pasar el cursor sobre el botón */
+.container-login .login-btn:hover {
+    background-color: #e67e22;
+}
+
+/* Estilo para los mensajes de error */
+.container-login .error {
+    color: red;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .container-login {
+        width: 80%; /* Aumenta el ancho en pantallas pequeñas */
+        padding: 20px;
+    }
+
+    .container-login h1 {
+        font-size: 2em;
+    }
+
+    .container-login .form-group input {
+        font-size: 1em;
+    }
+
+    .container-login .login-btn {
+        font-size: 1em;
+    }
+}

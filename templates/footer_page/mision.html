@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}Promociones de Pizza{% endblock %}
+
+{% block content %}
+<!-- Incluir el navbar específico para promociones -->
+{% include 'navbar.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<!-- Aquí añadimos el enlace al archivo styleMision.css -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styleMision.css') }}">
+
+
+<main>
+    <section class="misiones">
+        <h1>Nuestra Misión</h1>
+        <p>
+            En Pizza Feliz, nuestra misión es ofrecer a nuestros clientes una experiencia culinaria única y deliciosa,
+            brindando productos de calidad y un excelente servicio, con el compromiso de ser siempre innovadores y
+            mantener los más altos estándares en la preparación de nuestras pizzas y combos.
+        </p>
+        <h2>Compromiso con nuestros clientes</h2>
+        <p>
+            Nos comprometemos a ofrecer opciones accesibles para todos nuestros clientes, adaptándonos a sus
+            necesidades y preferencias. Estamos dedicados a la calidad y la frescura de nuestros ingredientes,
+            garantizando que cada pizza esté preparada con el más alto nivel de cuidado y sabor.
+        </p>
+    </section>
+</main>
+
+{% include 'footer.html' %}
+
+{% endblock %}

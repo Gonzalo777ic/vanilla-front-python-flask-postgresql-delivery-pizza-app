@@ -1,40 +1,37 @@
 {% extends 'layout.html' %}
 
-{% block title %}Pizzas - Pizza Delivery{% endblock %}
+{% block title %}Combos - Pizza Delivery{% endblock %}
 
 {% block content %}
-
 {% include 'navbar.html' %}
 
-        <!-- Contenido principal de los combos -->
-        <section class="promotions-header">
-            <h1>COMBOS</h1>
-            <div class="promotions-filters">
-                <button class="filter" data-category="ver_todo">VER TODO</button>
-                
-                {% if combos|length > 0 %}
-                    <form action="{{ url_for('views.combos') }}" method="GET">
-                        <button type="submit" class="filter">2 PERSONAS</button>
-                    </form>
-                    <form action="{{ url_for('views.combos') }}" method="GET">
-                        <button type="submit" class="filter">3-4 PERSONAS</button>
-                    </form>
-                {% endif %}
-            </div>
-        </section>
+<!-- Contenido principal de combos -->
+<section class="promotions-header">
+    <h1>COMBOS</h1>
+    <div class="promotions-filters">
+        <!-- Formulario para filtrar por categoría -->
+        <form method="GET" action="{{ url_for('views.mostrar_combos') }}">
+            <button type="submit" name="category" value="" class="filter">VER TODO</button>
+            <button type="submit" name="category" value="1" class="filter">1 PERSONA</button>
+            <button type="submit" name="category" value="2" class="filter">2 PERSONAS</button>
+            <button type="submit" name="category" value="3" class="filter">3-4 PERSONAS</button>
+            <button type="submit" name="category" value="4" class="filter">5 A MÁS</button>
+        </form>
+    </div>
+</section>
 
-        <section class="promotions">
-            {% for combo in combos %}
-                {% if 'combo' in combo.title.lower() %}
-                    <div class="promotion">
-                        <img src="{{ url_for('static', filename=combo.image) }}" alt="Combo {{ combo.title }}">
-                        <h2>{{ combo.title }}</h2>
-                        <p>{{ combo.description }}</p>
-                        <p class="price">S/ {{ combo.price }}</p> <!-- Precio añadido -->
-                        <button>COMPRAR</button>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </section>
-        {% include 'footer.html' %}
-        {% endblock %}
+<!-- Mostrar combos filtrados -->
+<section class="promotions">
+    {% for combo in combos %}
+    <div class="promotion" data-category="{{ combo.category_id }}">
+        <img src="{{ url_for('static', filename=combo.image) }}" alt="{{ combo.title }}">
+        <h2>{{ combo.title }}</h2>
+        <p>{{ combo.description }}</p>
+        <p class="price">S/ {{ combo.price }}</p>
+        <button>COMPRAR</button>
+    </div>
+    {% endfor %}
+</section>
+
+{% include 'footer.html' %}
+{% endblock %}

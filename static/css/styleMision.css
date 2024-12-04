@@ -1,0 +1,62 @@
+/* Estilos para el marco y centrado de la misión */
+.misiones {
+    width: 50%; /* Reduce el ancho a un 60% */
+    max-width: 700px; /* Ancho máximo más pequeño */
+    margin: 170px auto 70px auto; /* Reducir el margen inferior */
+    padding: 30px; /* Menos espaciado dentro del marco */
+    background-color: #ffffff; /* Fondo blanco limpio para resaltar el contenido */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más ligera */
+    text-align: center; /* Centrar el texto */
+    border: 1px solid #ddd; /* Borde fino y discreto */
+}
+
+/* Estilo del título principal */
+.misiones h1 {
+    font-size: 2.2em; /* Tamaño de fuente reducido para el título */
+    color: #2c3e50; /* Un color oscuro para hacer el título legible y serio */
+    margin-bottom: 20px; /* Menos espacio debajo del título */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    text-transform: uppercase; /* Mayúsculas para mayor impacto */
+    letter-spacing: 1.5px; /* Espaciado entre letras */
+}
+
+/* Estilo del párrafo */
+.misiones p {
+    font-size: 1.1em; /* Reducir ligeramente el tamaño del texto */
+    color: #7f8c8d; /* Color gris para el texto */
+    line-height: 1.6; /* Espaciado entre líneas ajustado */
+    max-width: 650px; /* Reducir el ancho máximo del párrafo */
+    margin: 0 auto 20px auto; /* Centrar el párrafo y dar espacio inferior */
+    font-family: 'Arial', sans-serif; /* Fuente clara */
+}
+
+/* Estilo del subtítulo */
+.misiones h2 {
+    font-size: 1.7em; /* Tamaño de subtítulo más pequeño */
+    color: #2c3e50; /* Color verde turquesa */
+    margin-top: 25px; /* Margen superior reducido */
+    margin-bottom: 15px; /* Menos espacio debajo del subtítulo */
+    font-weight: bold; /* Negrita para énfasis */
+    text-transform: capitalize; /* Capitalización del subtítulo */
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .misiones {
+        width: 80%; /* Más ancho en pantallas pequeñas */
+        padding: 20px; /* Menos padding en pantallas pequeñas */
+    }
+
+    .misiones h1 {
+        font-size: 2em; /* Tamaño de título más pequeño en móviles */
+    }
+
+    .misiones p {
+        font-size: 1em; /* Reducir el tamaño del texto en móviles */
+    }
+
+    .misiones h2 {
+        font-size: 1.4em; /* Tamaño de subtítulo más pequeño en móviles */
+    }
+}

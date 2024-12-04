@@ -1,90 +1,23 @@
-<!DOCTYPE html>  
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rastreo de Ubicación del Repartidor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <!-- Encabezado con el logo y el menú -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Pizza Feliz" class="logo-image" width="150">
-            </div>
-            <form action="{{ url_for('views.search') }}" method="GET" class="search-form">
-                <input type="text" name="query" placeholder="Buscar promociones..." class="search-input">
-                <input type="image" src="{{ url_for('static', filename='images/buscador.png') }}" alt="Buscar" class="search-button">
-            </form>
-            <nav>
-                <a href="{{ url_for('views.index') }}">MENÚ</a>
-                <a href="{{ url_for('views.rastreo') }}">PEDIDO</a>
-                <a href="">UBICACIÓN</a>
-            </nav>
-        </div>
-    </header>
+{% extends 'layout.html' %}
 
-    <!-- Contenido de la página de Rastreo -->
-    <main>
-        <h1>Rastreo de Ubicación</h1>
-        <p id="status">Estado: No rastreando</p>
-        <button onclick="iniciarRastreo()">Iniciar Rastreo</button>
-        <button onclick="detenerRastreo()">Detener Rastreo</button>
-    </main>
+{% block title %}Rastreo - Pizza Delivery{% endblock %}
 
-    <script>
-        let watchId;
+{% block content %}
+{% include 'navbar.html' %}
 
-        // Función para iniciar el rastreo de ubicación
-        function iniciarRastreo() {
-            if (navigator.geolocation) {
-                document.getElementById("status").innerText = "Estado: Rastreo iniciado...";
-                watchId = navigator.geolocation.watchPosition(enviarUbicacion, mostrarError, {
-                    enableHighAccuracy: true,
-                    maximumAge: 0
-                });
-            } else {
-                alert("Geolocalización no soportada en este navegador.");
-            }
-        }
+<!-- Contenido principal de rastreo -->
+<section class="rastreo-header">
+    <h1>Rastreo de Pedido</h1>
+    <p>Ubicación en tiempo real de tu repartidor</p>
+</section>
 
-        // Función para detener el rastreo de ubicación
-        function detenerRastreo() {
-            if (watchId) {
-                navigator.geolocation.clearWatch(watchId);
-                document.getElementById("status").innerText = "Estado: Rastreo detenido.";
-            }
-        }
+<!-- Mapa embebido -->
+<section class="mapa">
+    <div class="map-container">
+        <!-- Aquí incrustamos el mapa de Google Maps -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7801.51133721026!2d-76.98169011959025!3d-12.128862851523863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b8744cfaa167%3A0x29cfaf71d2143ff4!2sDON%20DINO%20Pizza%20%26%20Pasta!5e0!3m2!1sen!2spe!4v1733247725277!5m2!1sen!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
 
-        // Enviar la ubicación al servidor Flask
-        function enviarUbicacion(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-
-            fetch('/actualizar_ubicacion', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    lat: lat,
-                    lon: lon
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Ubicación enviada:", data);
-            })
-            .catch(error => {
-                console.error("Error al enviar la ubicación:", error);
-            });
-        }
-
-        // Mostrar errores si la geolocalización falla
-        function mostrarError(error) {
-            console.warn(`ERROR(${error.code}): ${error.message}`);
-        }
-    </script>
-</body>
-</html>
+{% include 'footer.html' %}
+{% endblock %}

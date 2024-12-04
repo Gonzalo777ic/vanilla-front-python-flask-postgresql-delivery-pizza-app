@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+{% block title %}Términos y Condiciones de Promociones{% endblock %}
+
+{% block content %}
+<!-- Incluir el navbar específico para promociones -->
+{% include 'navbar.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styleTerminos.css') }}">
+
+
+<main>
+    <div class="container-terminos">
+        <div class="columns">
+            <!-- Columna izquierda: menú de ayuda -->
+            <div class="sidebar">
+                <h2>Ayuda</h2>
+                <ul class="sidebar-list">
+                    <li><a href="{{ url_for('views.politicas') }}" class="text-white">Políticas de Datos Personales</a>
+                    </li>
+                    <li><a href="{{ url_for('views.terminos') }}" class="text-white">Términos y Condiciones de
+                            Promociones</a></li>
+                    <li><a href="{{ url_for('views.contactanos') }}" class="text-white">Contáctanos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna derecha: contenido de términos y condiciones -->
+            <div class="terminos">
+                <h1 onclick="toggleContent(this)">
+                    TÉRMINOS Y CONDICIONES DE PROMOCIONES
+                    <div class="arrow">&#x2193;</div> <!-- Flecha hacia abajo -->
+                </h1>
+                <div class="content-box" id="content-box">
+                    <h2 class="subtitle">TÉRMINOS Y CONDICIONES DE PROMOCIONES</h2>
+                    <p class="text">
+                        Bienvenido a Pizza Feliz. Al acceder a nuestras promociones, usted acepta estar sujeto a los
+                        siguientes términos y condiciones. Asegúrese de leerlos cuidadosamente.
+                    </p>
+                    <p class="text">
+                        1. Las promociones están disponibles solo para clientes que cumplan con los requisitos
+                        establecidos en cada promoción.
+                    </p>
+                    <p class="text">
+                        2. Las promociones no son acumulables con otras ofertas o descuentos, a menos que se indique lo
+                        contrario.
+                    </p>
+                    <p class="text">
+                        3. Las promociones pueden estar sujetas a fechas y horas específicas de validez, según lo
+                        indicado en la publicidad correspondiente.
+                    </p>
+                    <p class="text">
+                        4. Pizza Feliz se reserva el derecho de modificar o cancelar cualquier promoción sin previo
+                        aviso, por razones de fuerza mayor o cualquier circunstancia que lo justifique.
+                    </p>
+                    <p class="text">
+                        5. Para mayor información sobre las condiciones de cada promoción, consulte los detalles en
+                        nuestra página web o póngase en contacto con nuestro servicio al cliente.
+                    </p>
+                    <h2 class="subtitle">PROMOCIONES EXCLUSIVAS Y LIMITADAS</h2>
+                    <p class="text">
+                        Algunas promociones tienen un límite de tiempo o una cantidad específica de productos.
+                        Recomendamos consultar los detalles específicos de cada promoción para asegurarse de que puede
+                        aprovecharla antes de que expire.
+                    </p>
+                    <h2 class="subtitle">CONDICIONES DE ENTREGA</h2>
+                    <p class="text">
+                        Las promociones que incluyan entrega a domicilio están sujetas a la disponibilidad de nuestra
+                        cobertura en su área. Los tiempos de entrega pueden variar según la demanda y el tráfico.
+                    </p>
+                    <h2 class="subtitle">GARANTÍA DE SATISFACIÓN</h2>
+                    <p class="text">
+                        En Pizza Feliz, nos comprometemos a brindar productos frescos y de alta calidad. Si no está
+                        satisfecho con su pedido, no dude en comunicarse con nosotros para encontrar una solución.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent() {
+            var contentBox = document.querySelector('.content-box');
+            var arrow = document.querySelector('.arrow');
+
+            // Alternar la visibilidad del contenido
+            contentBox.classList.toggle('show');
+
+            // Cambiar la dirección de la flecha
+            document.querySelector('h1').classList.toggle('open');
+
+            // Hacer un scroll suave hacia el contenido
+            contentBox.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+    </body>
+
+    </html>
+    {% include 'footer.html' %}
+
+    {% endblock %}

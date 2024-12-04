@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% block title %}Políticas de Datos Personales{% endblock %}
+
+{% block content %}
+<!-- Incluir el navbar específico para promociones -->
+{% include 'navbar.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/stylePoliticas.css') }}">
+<main>
+    <div class="container-politicas">
+        <div class="columns">
+            <!-- Columna izquierda: menú de ayuda -->
+            <div class="sidebar">
+                <h2>Ayuda</h2>
+                <ul class="sidebar-list">
+                    <li><a href="{{ url_for('views.politicas') }}" class="text-white">Políticas de Datos Personales</a>
+                    </li>
+                    <li><a href="{{ url_for('views.terminos') }}" class="text-white">Términos y Condiciones de
+                            Promociones</a></li>
+                    <li><a href="{{ url_for('views.contactanos') }}" class="text-white">Contáctanos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna derecha: contenido de políticas de datos personales -->
+            <div class="politicas">
+                <h1 onclick="toggleContent(this)">
+                    POLÍTICAS DE DATOS PERSONALES
+                    <div class="arrow">&#x2193;</div> <!-- Flecha hacia abajo -->
+                </h1>
+                <div class="content-box" id="content-box">
+                    <h2 class="subtitle">POLÍTICAS DE DATOS PERSONALES</h2>
+                    <p class="text">
+                        En Pizza Feliz, valoramos su privacidad y nos comprometemos a proteger los datos personales que
+                        nos confía. Lea atentamente nuestras políticas para conocer cómo recopilamos, usamos y
+                        protegemos su información.
+                    </p>
+                    <h2 class="subtitle">1. Información Recopilada</h2>
+                    <p class="text">
+                        Recopilamos información personal que usted nos proporciona cuando interactúa con nuestros
+                        servicios, como su nombre, dirección de correo electrónico y detalles de pago.
+                    </p>
+                    <h2 class="subtitle">2. Uso de la Información</h2>
+                    <p class="text">
+                        Utilizamos la información recopilada para procesar sus pedidos, mejorar nuestros servicios y
+                        personalizar su experiencia en Pizza Feliz.
+                    </p>
+                    <h2 class="subtitle">3. Protección de la Información</h2>
+                    <p class="text">
+                        Implementamos medidas de seguridad para proteger sus datos personales. Sin embargo, no podemos
+                        garantizar una seguridad absoluta debido a la naturaleza de la transmisión de datos en línea.
+                    </p>
+                    <h2 class="subtitle">4. Compartir Información</h2>
+                    <p class="text">
+                        No compartimos su información personal con terceros sin su consentimiento, salvo en los casos en
+                        que sea necesario para cumplir con la ley o procesar su pedido.
+                    </p>
+                    <h2 class="subtitle">5. Derechos del Usuario</h2>
+                    <p class="text">
+                        Usted tiene derecho a acceder, corregir o eliminar la información personal que hemos recopilado.
+                        Si desea ejercer estos derechos, por favor contáctenos a través de nuestro servicio de atención
+                        al cliente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer bg-dark text-light py-4">
+
+    <script>
+        function toggleContent() {
+            var contentBox = document.querySelector('.content-box');
+            var arrow = document.querySelector('.arrow');
+
+            // Alternar la visibilidad del contenido
+            contentBox.classList.toggle('show');
+
+            // Cambiar la dirección de la flecha
+            document.querySelector('h1').classList.toggle('open');
+
+            // Hacer un scroll suave hacia el contenido
+            contentBox.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+    {% include 'footer.html' %}
+
+    {% endblock %}

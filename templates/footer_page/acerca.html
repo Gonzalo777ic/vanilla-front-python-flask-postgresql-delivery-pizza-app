@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}Acerca de Pizza Feliz{% endblock %}
+
+{% block content %}
+<!-- Incluir el navbar específico para promociones -->
+{% include 'navbar.html' %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styleAcerca.css') }}">
+
+
+<main>
+    <div class="container">
+        <div class="acerca">
+            <h1 class="title">Acerca de Pizza Feliz</h1>
+            <div class="content-box">
+                <p class="text">
+                    Pizza Feliz nació con la idea de ofrecer las mejores pizzas de la ciudad, preparadas con
+                    ingredientes frescos y de calidad. Nuestra misión es brindar a cada cliente una experiencia
+                    gastronómica única, disfrutando de la calidez y el sabor que caracteriza a nuestras pizzas.
+                </p>
+                <p class="text">
+                    Desde nuestros primeros días, nos hemos enfocado en la satisfacción del cliente, ofreciendo una
+                    amplia variedad de opciones que se adaptan a todos los gustos. Nuestro compromiso con la calidad nos
+                    ha permitido ser una marca de confianza en la comunidad.
+                </p>
+                <p class="text">
+                    En Pizza Feliz, creemos que la clave del éxito radica en la innovación constante, sin perder nunca
+                    de vista nuestras raíces: un producto delicioso, accesible y preparado con amor. Cada pizza que
+                    servimos es el reflejo de nuestra pasión por ofrecer lo mejor.
+                </p>
+                <p class="text">
+                    Nuestra visión es seguir expandiendo nuestras tiendas y hacer que Pizza Feliz sea la opción
+                    preferida por cada vez más personas, manteniendo siempre nuestra filosofía de calidad y servicio
+                    excepcional.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% include 'footer.html' %}
+
+{% endblock %}
