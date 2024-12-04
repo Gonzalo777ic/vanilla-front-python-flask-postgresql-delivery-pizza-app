@@ -10,7 +10,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__,static_folder='../static', template_folder='../templates')  # Asegúrate de poner la ruta correcta
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:pingo123@192.168.1.11:5432/aes_project'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:contraseña@ip-sistema_operativo_con_postgre:5432/nombre_base_de_datos'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Inicializa las extensiones
