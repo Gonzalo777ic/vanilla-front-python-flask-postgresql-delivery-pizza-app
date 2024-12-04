@@ -1,7 +1,7 @@
 # Proyecto de Arquitectura de Software
 
-Este es un proyecto de ejemplo desarrollado en Flask que implementa un sistema cliente-servidor con PostgreSQL como base de datos. El proyecto incluye funcionalidades de autenticación, gestión de usuarios y algunas operaciones CRUD relacionadas.
-RAMA MÁS ACTUALIZADA: rama2
+Este es un proyecto de ejemplo desarrollado en Flask que implementa un sistema cliente-servidor con PostgreSQL como base de datos. El proyecto incluye funcionalidades de autenticación, gestión de usuarios y algunas operaciones CRUD relacionadas.  
+**RAMA MÁS ACTUALIZADA**: `rama2`
 
 ## Tabla de Contenidos
 
@@ -23,7 +23,7 @@ RAMA MÁS ACTUALIZADA: rama2
 - Encriptación de contraseñas con **bcrypt**.
 - Gestión de base de datos con **Flask-SQLAlchemy** y **Flask-Migrate**.
 - Conexión a **PostgreSQL**.
-- Modularización de rutas mediante Blueprints.
+- Modularización de rutas mediante **Blueprints**.
 
 ---
 
@@ -31,14 +31,14 @@ RAMA MÁS ACTUALIZADA: rama2
 
 Este proyecto utiliza las siguientes herramientas y tecnologías:
 
-- Python 3.x
-- Flask
+- **Python 3.x**
+- **Flask**
   - Flask-SQLAlchemy
   - Flask-Migrate
   - Flask-Login
-- PostgreSQL
-- bcrypt para el manejo de contraseñas
-- Jinja2 para plantillas HTML
+- **PostgreSQL**
+- **bcrypt** para el manejo de contraseñas
+- **Jinja2** para plantillas HTML
 
 ---
 
@@ -60,7 +60,7 @@ Asegúrate de tener instalados los siguientes elementos antes de comenzar:
    git clone https://github.com/tu_usuario/nombre_del_repositorio.git
    cd nombre_del_repositorio
 
-
+   
 Crear y activar un entorno virtual:
 
 bash
@@ -93,30 +93,3 @@ bash
 Copy code
 flask run
 La aplicación estará disponible en http://localhost:5000.
-
-Uso
-Abre el navegador y visita http://localhost:5000.
-Accede a las funcionalidades del sistema:
-Registro y autenticación de usuarios.
-Operaciones CRUD.
-Visualización de datos dinámicos mediante plantillas Jinja2.
-Estructura del Proyecto
-php
-Copy code
-├── app/
-│   ├── __init__.py       # Inicialización de la app y configuración
-│   ├── models.py         # Modelos SQLAlchemy
-│   ├── views/            # Blueprints y rutas
-│   │   ├── __init__.py
-│   │   └── views.py
-│   ├── static/           # Archivos estáticos (CSS, JS, imágenes)
-│   └── templates/        # Plantillas HTML
-├── migrations/           # Archivos de migración
-├── requirements.txt      # Dependencias del proyecto
-├── README.md             # Este archivo
-└── run.py                # Punto de entrada para ejecutar la app
-
-
-### Notas adicionales:
-1. Reemplaza `tu_usuario/nombre_del_repositorio` por la URL de tu repositorio de GitHub.
-2. Si tu proyecto tiene características específicas adicionales, como configuraciones para Docker, puedes añadir esas instrucciones.
